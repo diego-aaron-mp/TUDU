@@ -25,13 +25,7 @@
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
+            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
           </li>
         </ul>
         <span class="navbar-text">
@@ -45,7 +39,8 @@
   <div class="container mt-3 mb-3">
     <div class="row g-3">
       <div class="col-12">
-        <button type="button" id="btnCreateList" class="btn btn-primary btn-block" data-toggle="modal" data-target="#createListModal">
+        <button type="button" id="btnCreateList" class="btn btn-primary btn-block" data-toggle="modal"
+          data-target="#createListModal">
           Crear nueva lista
         </button>
       </div>
@@ -64,6 +59,7 @@
             <h5 class="card-title">Lista</h5>
             <p class="card-text">Objetivo de la Lista</p>
             <a href="#" class="btn btn-primary">Ver más</a>
+            <a href="#" class="btn btn-danger">Eliminar</a>
           </div>
         </div>
       </div>
@@ -88,12 +84,12 @@
             <div class="form-group">
               <label for="inputListName">Nombre de la lista</label>
               <input type="text" class="form-control" id="inputListName" aria-describedby="inputListName"
-                placeholder="Ej. Estudio de inglés" >
+                placeholder="Ej. Estudio de inglés">
             </div>
             <div class="form-group">
               <label for="inputObjective">Objetivo de la lista</label>
               <textarea class="form-control" id="inputObjective" rows="3"
-                placeholder="Ej. Alcanzar un nivel que me permita entablar una conversación con un hablante nativo." ></textarea>
+                placeholder="Ej. Alcanzar un nivel que me permita entablar una conversación con un hablante nativo."></textarea>
             </div>
           </form>
         </div>
@@ -104,6 +100,73 @@
     </div>
   </div>
 
+  <!-- Botones para las frases y consejos -->
+  <div class="btnFraseConsejo">
+    <div class="container-fluid">
+      <div class="row">
+          <div class="btn-group btn-group-vertical" role="group" aria-label="Basic example">
+            <button id="btnConsejo" type="button" class="btn btn-secondary">
+              <i class="bi bi-lightbulb-fill"></i>
+            </button>
+            <button id="btnFrase" type="button" class="btn btn-secondary">
+              <i class="bi bi-brightness-high-fill"></i>
+            </button>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de frases motivadoras -->
+  <div class="modal fade" id="fraseModal" tabindex="-1" role="dialog" aria-labelledby="fraseModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="fraseModalLabel">Motívame</h5>
+          <button type="button" id="btnCloseFraseModal" class="close btn-close" data-dismiss="modal" aria-label="Close">
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>
+            Una frase bien bonita.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <strong>
+            Autor de la frase
+          </strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de consejos -->
+  <div class="modal fade" id="consejoModal" tabindex="-1" role="dialog" aria-labelledby="consejoModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="consejoModalLabel">Consejo</h5>
+          <button type="button" id="btnCloseConsejoModal" class="close btn-close" data-dismiss="modal"
+            aria-label="Close">
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>
+            Un consejo bien bonito.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <strong>
+            Autor del consejo
+          </strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  
 
 
   <!-- Bootstrap -->
@@ -115,6 +178,8 @@
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <!-- CreateList Script -->
   <script src="/assets/scripts/createList.js"></script>
+
+  <script src="/assets/scripts/prubas.js"></script>
 </body>
 
 </html>

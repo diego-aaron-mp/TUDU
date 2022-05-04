@@ -14,6 +14,7 @@
 </head>
 
 <body class="bg-light">
+
   <!-- Cabecera -->
   <nav class="navbar navbar-expand-lg navbar-light bg-primary">
     <div class="container-fluid">
@@ -50,13 +51,22 @@
         explicabo vero provident quos repudiandae saepe asperiores fugit dolore, assumenda facilis debitis possimus
         animi. Modi exercitationem eum quasi voluptates.</p>
     </div>
+    <!-- Boton para editar el objetivo -->
+    <div class="container-fluid py-2">
+      <button class="btn btn-primary btn-lg btn-block" type="button" data-toggle="modal" data-target="#exampleModal">
+        Editar objetivo
+      </button>
+      </div>
   </div>
 
   <!-- Jumbotron del Temporizador para Pomodoro -->
   <div class="jumbotron jumbotron-fluid mb-2 mt-2">
     <div class="container">
       <h3 class="text-center">Temporizador Pomodoro</h3>
-      <h5 class="text-center text-secondary">Bloques completados: <span id="iterBlockNumber">0</span> <span>/ </span> <span id="totalBlocks">4</span></h5>
+      <h5 class="text-center text-secondary">Bloques completados: <span id="iterBlockNumber">0</span> <span>/ </span>
+        <span id="totalBlocks">4</span>
+      </h5>
+      <h6 class="text-center text-capitalize" id="modoActual"></h6>
       <div class="text-center">
         <div class="display-3 fw-bold">
           <span id="minutes">25</span>:<span id="seconds">0</span>
@@ -83,12 +93,11 @@
     </div>
   </div>
 
-
-  <!-- Input para agregar nueva tarea -->
+  <!-- Input para agregar una nueva tarea/nota con su descripcion -->
   <div class="container mt-3 mb-3">
     <div class="row g-3">
       <!-- Agregar una nueva tarea -->
-      <div class="col-12 col-md-12 col-lg-12">
+      <div class="col-12 col-md-6 col-lg-6 col-sm-12">
         <div class="card">
           <div class="card-body">
             <!-- Input para agregar nueva tarea -->
@@ -96,15 +105,43 @@
             <div class="input-group">
               <input type="text" class="form-control" placeholder="Agregar tarea" aria-label="Agregar subtarea"
                 aria-describedby="basic-addon2">
-              <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button">
-                  <i class="bi bi-plus-lg"></i>
-                </button>
-              </div>
+            </div>
+            <div class="input-group mt-3">
+              <!-- Text area para escribir la descipcion de la nueva tarea -->
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                placeholder="Descripción de la tarea"></textarea>
+            </div>
+            <div class="input-group mt-3">
+              <!-- Boton para agregar la nueva tarea -->
+              <button type="button" class="btn btn-primary">Agregar</button>
             </div>
           </div>
         </div>
       </div>
+
+      <!-- Agregar una nueva nota -->
+      <div class="col-12 col-md-6 col-lg-6 col-sm-12">
+        <div class="card">
+          <div class="card-body">
+            <!-- Input para agregar nueva nota -->
+            <h5 class="card-title">Agregar nueva nota</h5>
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Agregar nota" aria-label="Agregar nota"
+                aria-describedby="basic-addon2">
+            </div>
+            <div class="input-group mt-3">
+              <!-- Text area para escribir la descipcion de la nueva nota -->
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                placeholder="Descripción de la nota"></textarea>
+            </div>
+            <div class="input-group mt-3">
+              <!-- Boton para agregar la nueva nota -->
+              <button type="button" class="btn btn-primary">Agregar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Fin de agregar nueva nota -->
     </div>
   </div>
 
@@ -115,8 +152,14 @@
       <div class="col-12 col-md-12 col-lg-12">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Tarea</h5>
-            <p class="card-text">Descripcion de la tarea</p>
+            <!-- Titulo de la card -->
+            <div class="modal-header">
+              <h5 class="card-title"> <input type="checkbox" class="form-check-input" id="customCheck1">Tarea</h5>
+              <!-- Boton de eliminar  -->
+              <button type="button" class="btn btn-close">
+              </button>
+            </div>
+            <p class="card-text mt-1">Descripcion de la tarea</p>
             <h6 class="card-text">Subtareas</h6>
             <!-- Input de subtareas -->
             <div class="input-group mb-3">
@@ -129,21 +172,160 @@
               </div>
             </div>
             <!-- Checklist -->
-            <div class="list-group">
+            <div class="list-group mb-3">
               <label class="list-group-item">
                 <input class="form-check-input me-1" type="checkbox" value="">
-                Subtarea
-                <!-- Boton de eliminar  -->
-                <button type="button" class="btn btn-close">
+                Subtarea un poco mas grande para calar esta cosa
+                
+                <!-- Boton de editar -->
+                <button id="btnEditSubtask" type="button" class="btn btn-secondary">
+                  <i class="bi bi-pencil"></i>
                 </button>
+                  <!-- Boton de eliminar  -->
+                  <button type="button" class="btn btn-danger">
+                    <i class="bi bi-trash"></i>
+                  </button>
+
+
               </label>
             </div>
             <!-- Fin de checklist -->
+            <!-- Boton para editar -->
+            <button id="btnEditTask" class="btn btn-primary mt-2">Editar</button>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Notas -->
+  <div class="container mt-3 mb-3">
+    <div class="row g-3">
+      <!-- Aqui inicia una card -->
+      <div class="col-12 col-md-12 col-lg-12">
+        <div class="card">
+          <!-- Card header -->
+          <div class="modal-header">
+            <!-- Titulo de la card -->
+            <h5 class="card-title">Nota</h5>
+            <!-- Boton de eliminar  -->
+            <button type="button" class="btn btn-close">
+            </button>
+          </div>
+          <div class="card-body">
+            <p class="card-text">Descripcion de la nota</p>
+            <!-- Boton para editar -->
+            <button id="btnEditNote" type="button" class="btn btn-primary mt-2">Editar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modales -->
+  <!-- Modal para editar tareas-->
+  <div class="modal fade" id="editTaskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+          <button type="button" class="close btn-close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true"></span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <!-- Input para editar el titulo de la tarea -->
+          <div class="form-group">
+            <label for="inputTitleTask">Titulo de la tarea</label>
+            <input type="text" class="form-control" id="inputTitleTask" aria-describedby="inputTitleTask"
+              placeholder="Ej. Tarea de estudio">
+          </div>
+
+          <!-- Text area para editar la descripcion de la tarea -->
+          <div class="form-group">
+            <label for="inputDescriptionTask">Descripcion de la tarea</label>
+            <textarea class="form-control" id="inputDescriptionTask" rows="3"
+              placeholder="Ej. Estudiar para el examen de final de semestre"></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para editar subtareas -->
+  <div class="modal fade" id="editSubtaskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <!-- Input para editar el titulo de la subtarea -->
+          <div class="form-group">
+            <label for="inputTitleSubtask">Titulo de la subtarea</label>
+            <input type="text" class="form-control" id="inputTitleSubtask" aria-describedby="inputTitleSubtask"
+              placeholder="Ej. Subtarea de estudio">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+
+
+
+
+  <!-- Modal para editar una nota -->
+  <div class="modal fade" id="editModalNote" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+          <button type="button" class="close btn-close" data-dismiss="modal" aria-label="Close">
+
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Input para el titulo de la nota -->
+
+          <div class="form-group">
+            <label for="inputTitleNote">Titulo de la nota</label>
+            <input type="text" class="form-control" id="inputTitleNote" aria-describedby="inputTitleNote"
+              placeholder="Ej. Nota de estudio">
+          </div>
+
+          <!-- Input para editar la descripcion de la nota -->
+          <div class="form-group">
+            <label for="inputDescriptionNote">Descripcion de la nota</label>
+            <textarea class="form-control" id="inputDescriptionNote" rows="3"
+              placeholder="Ej. Estudio de inglés"></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 
 
@@ -156,6 +338,10 @@
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <!-- Temporizador -->
   <script src="/assets/scripts/pomodoroTimer.js"></script>
+
+  <script src="/assets/scripts/editTask.js"></script>
+  <script src="/assets/scripts/editSubtask.js"></script>
+
 </body>
 
 </html>
