@@ -44,7 +44,7 @@
 
   <!-- Contenido -->
   <!-- Jumbotron del objetivo de la lista -->
-  <div class="p-5 mb-auto mt-auto">
+  <div class="p-5 jumbotron jumbotron-fluid mb-2 mt-2">
     <div class="container-fluid py-2">
       <h1 class="display-5 fw-bold"><i class="bi bi-trophy-fill"> </i>Objetivo</h1>
       <p class="col-md-12 fs-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque voluptas, architecto,
@@ -53,10 +53,10 @@
     </div>
     <!-- Boton para editar el objetivo -->
     <div class="container-fluid py-2">
-      <button class="btn btn-primary btn-lg btn-block" type="button" data-toggle="modal" data-target="#exampleModal">
+      <button id="btnEditObjective" class="btn btn-primary btn-lg btn-block" type="button" data-toggle="modal" data-target="#exampleModal">
         Editar objetivo
       </button>
-      </div>
+    </div>
   </div>
 
   <!-- Jumbotron del Temporizador para Pomodoro -->
@@ -154,7 +154,7 @@
           <div class="card-body">
             <!-- Titulo de la card -->
             <div class="modal-header">
-              <h5 class="card-title"> <input type="checkbox" class="form-check-input" id="customCheck1">Tarea</h5>
+              <h5 class="card-title"><input type="checkbox" class="form-check-input" id="customCheck1">Tarea</h5>
               <!-- Boton de eliminar  -->
               <button type="button" class="btn btn-close">
               </button>
@@ -176,15 +176,15 @@
               <label class="list-group-item">
                 <input class="form-check-input me-1" type="checkbox" value="">
                 Subtarea un poco mas grande para calar esta cosa
-                
+
                 <!-- Boton de editar -->
                 <button id="btnEditSubtask" type="button" class="btn btn-secondary">
                   <i class="bi bi-pencil"></i>
                 </button>
-                  <!-- Boton de eliminar  -->
-                  <button type="button" class="btn btn-danger">
-                    <i class="bi bi-trash"></i>
-                  </button>
+                <!-- Boton de eliminar  -->
+                <button type="button" class="btn btn-danger">
+                  <i class="bi bi-trash"></i>
+                </button>
 
 
               </label>
@@ -265,8 +265,8 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+          <button type="button" class="close btn-close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true"></span>
           </button>
         </div>
 
@@ -285,10 +285,6 @@
       </div>
     </div>
   </div>
-  
-
-
-
 
 
   <!-- Modal para editar una nota -->
@@ -326,6 +322,39 @@
     </div>
   </div>
 
+  <!-- Modal para editar el objetivo -->
+  <div class="modal fade" id="editModalObjective" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+          <button type="button" class="close btn-close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true"></span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Input para editar el titulo del objetivo -->
+          <div class="form-group">
+            <label for="inputTitleObjective">Titulo del objetivo</label>
+            <input type="text" class="form-control" id="inputTitleObjective" aria-describedby="inputTitleObjective"
+              placeholder="Ej. Objetivo de estudio">
+          </div>
+
+          <!-- Input para editar la descripcion del objetivo -->
+          <div class="form-group">
+            <label for="inputDescriptionObjective">Descripcion del objetivo</label>
+            <textarea class="form-control" id="inputDescriptionObjective" rows="3"
+              placeholder="Ej. Estudiar para el examen de final de semestre"></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 
@@ -341,6 +370,7 @@
 
   <script src="/assets/scripts/editTask.js"></script>
   <script src="/assets/scripts/editSubtask.js"></script>
+  <script src="/assets/scripts/editObjective.js"></script>
 
 </body>
 
