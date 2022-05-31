@@ -1,3 +1,7 @@
+/* Importar normalize.css */
+@import url(normalize.css);
+
+
 * {
     margin: 0;
     padding: 0;
@@ -5,4 +9,11 @@
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 
+}
+/* Sticky button */
+.btnFraseConsejo {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 10px;
 }
