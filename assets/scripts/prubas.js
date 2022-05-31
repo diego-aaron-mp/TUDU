@@ -14,5 +14,10 @@
         $('#fraseModal').modal('hide');
     }
     );
+
+    // Abrir el modal del consejo
+    $('#btnConsejo').click(function () {
+       $('#consejoModal').modal('show'); 
+    });
 }
 )();
