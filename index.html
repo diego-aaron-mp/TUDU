@@ -19,47 +19,64 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-primary shadow-sm sticky-top">
     <div class="container-fluid">
       <!-- Logo para ir a Inicio -->
-      <a class="navbar-brand" href="#"> <img src="./assets/images/TuduComprimido.png" alt="Ir a inicio" class="img-fluid goHome"></a>
+      <a class="navbar-brand" href="#"> <img src="./assets/images/TuduComprimido.png" alt="Ir a inicio"
+          class="img-fluid goHome"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
         aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          
-            <!-- Dropdown de Usuario -->
-            <div class="dropdown me-2 mb-1 mt-1">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="bi bi-person-fill"></i>
-                Usuario
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Perfil</a>
-                <a class="dropdown-item" href="#">Cerrar sesión</a>
-              </div>
-            </div>
-            <!-- Fin de Dropdown de usuario -->
 
-            <!-- Dropdown de Listas -->
-            <div class="dropdown me-2 mb-1 mt-1"">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="bi bi-list-check"></i>
-                Listas
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Lista 1</a>
-                <a class="dropdown-item" href="#">Lista 2</a>
-                <a class="dropdown-item" href="#">Lista 3</a>
-              </div>
+          <!-- Dropdown de Usuario -->
+          <div class="dropdown me-2 mb-1 mt-1">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+              data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="bi bi-person-fill"></i>
+              Usuario
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">Perfil</a>
+              <a class="dropdown-item" href="#">Cerrar sesión</a>
             </div>
-            <!-- Fin de Dropdown de Listas -->
-          
+          </div>
+          <!-- Fin de Dropdown de usuario -->
+
+          <!-- Dropdown de Listas -->
+          <div class="dropdown me-2 mb-1 mt-1"">
+              <button class=" btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="bi bi-list-check"></i>
+            Listas
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">Lista 1</a>
+              <a class="dropdown-item" href="#">Lista 2</a>
+              <a class="dropdown-item" href="#">Lista 3</a>
+            </div>
+          </div>
+          <!-- Fin de Dropdown de Listas -->
+
+          <!-- Botón de para abir el modal de frase -->
+          <div>
+            <button type="button" class="btn btn-secondary me-2 mb-1 mt-1" data-bs-toggle="modal"
+              data-bs-target="#exampleModal">
+              <i class="bi bi-brightness-high-fill"></i>
+              Frase
+            </button>
+          </div>
+          <!-- Fin de Botón de para abir el modal de frase -->
+
+          <!-- Boton para abrir el modal de consejo -->
+          <div>
+            <button type="button" class="btn btn-secondary me-2 mb-1 mt-1" data-bs-toggle="modal"
+              data-bs-target="#exampleModal2">
+              <i class="bi bi-lightbulb-fill"></i>
+              Consejo
+            </button>
+          </div>
+          <!-- Fin de Boton para abrir el modal de consejo -->
         </ul>
-        <span class="navbar-text">
-          Navbar text with an inline element
-        </span>
       </div>
     </div>
   </nav>
@@ -68,18 +85,18 @@
   <!-- Jumbotron del objetivo de la lista -->
   <div class="p-5 jumbotron jumbotron-fluid mb-2 mt-2">
     <div class="container-fluid py-2">
-      <h1 class="display-5 fw-bold"><i class="bi bi-trophy-fill"> </i>Objetivo</h1>
+      <h1 class="display-5 fw-bold"><i class="bi bi-trophy-fill"> </i>Objetivo
+        <!-- Boton para editar el objetivo -->
+        <button id="btnEditObjective" class="btn btn-secondary btn-lg btn-block" type="button" data-toggle="modal"
+          data-target="#exampleModal">
+          <i class="bi bi-pencil"></i>
+        </button>
+      </h1>
       <p class="col-md-12 fs-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque voluptas, architecto,
         explicabo vero provident quos repudiandae saepe asperiores fugit dolore, assumenda facilis debitis possimus
         animi. Modi exercitationem eum quasi voluptates.</p>
     </div>
-    <!-- Boton para editar el objetivo -->
-    <div class="container-fluid py-2">
-      <button id="btnEditObjective" class="btn btn-primary btn-lg btn-block" type="button" data-toggle="modal"
-        data-target="#exampleModal">
-        Editar objetivo
-      </button>
-    </div>
+
   </div>
 
   <!-- Jumbotron del Temporizador para Pomodoro -->
@@ -187,7 +204,7 @@
               <!-- Boton para agregar subtareas -->
               <button type="button" id="btnAddSubtask" class="btn btn-primary btn-sm" data-toggle="modal"
                 data-target="#exampleModal">
-                Agregar subtarea
+                <i class="bi bi-plus"></i>
               </button>
             </h6>
 
