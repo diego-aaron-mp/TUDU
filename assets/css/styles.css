@@ -17,3 +17,9 @@
     right: 0;
     padding: 10px;
 }
+
+/* Imagen pequeña */
+.goHome {
+    width: 5vh;
+    height: 5vh;
+}

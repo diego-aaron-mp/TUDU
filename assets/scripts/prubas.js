@@ -19,5 +19,11 @@
     $('#btnConsejo').click(function () {
        $('#consejoModal').modal('show'); 
     });
+
+    // Abrir el modal para agregar subtareas
+    $('#btnAddSubtask').click(function () {
+        $('#addSubtaskModal').modal('show');
+    }
+    );
 }
 )();

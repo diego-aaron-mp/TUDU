@@ -16,18 +16,46 @@
 <body class="bg-light">
 
   <!-- Cabecera -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+  <nav class="navbar navbar-expand-lg navbar-light bg-primary shadow-sm sticky-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">TUDÚ</a>
+      <!-- Logo para ir a Inicio -->
+      <a class="navbar-brand" href="#"> <img src="./assets/images/TuduComprimido.png" alt="Ir a inicio" class="img-fluid goHome"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
         aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-          </li>
+          
+            <!-- Dropdown de Usuario -->
+            <div class="dropdown me-2 mb-1 mt-1">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="bi bi-person-fill"></i>
+                Usuario
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Perfil</a>
+                <a class="dropdown-item" href="#">Cerrar sesión</a>
+              </div>
+            </div>
+            <!-- Fin de Dropdown de usuario -->
+
+            <!-- Dropdown de Listas -->
+            <div class="dropdown me-2 mb-1 mt-1"">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="bi bi-list-check"></i>
+                Listas
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Lista 1</a>
+                <a class="dropdown-item" href="#">Lista 2</a>
+                <a class="dropdown-item" href="#">Lista 3</a>
+              </div>
+            </div>
+            <!-- Fin de Dropdown de Listas -->
+          
         </ul>
         <span class="navbar-text">
           Navbar text with an inline element
@@ -165,8 +193,6 @@
       </div>
     </div>
   </div>
-
-  
   
 
 
