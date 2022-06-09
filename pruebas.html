@@ -17,6 +17,55 @@
         </div>
     </footer>
 
+
+      <!-- Tareas y subtareas -->
+  <div class="container mt-3 mb-3">
+    <div class="row g-3">
+      <!-- Aqui inicia una card -->
+      <div class="col-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <!-- Titulo de la card -->
+            <div class="modal-header">
+              <h5 class="card-title"><input type="checkbox" class="form-check-input" id="customCheck1">&nbsp;Tarea</h5>
+              <!-- Boton de eliminar  -->
+              <button type="button" class="btn btn-close">
+              </button>
+            </div>
+            <p class="card-text mt-1">Descripcion de la tarea</p>
+            <h6 class="card-text">Subtareas
+              <!-- Boton para agregar subtareas -->
+              <button type="button" id="btnAddSubtask" class="btn btn-primary btn-sm" data-toggle="modal"
+                data-target="#exampleModal">
+                <i class="bi bi-plus"></i>
+              </button>
+            </h6>
+
+
+            <!-- Checklist -->
+            <div class="list-group mb-3">
+              <label class="list-group-item">
+                <input class="form-check-input me-1" type="checkbox" value="">
+                Subtarea un poco mas grande para calar esta cosa
+                <!-- Boton de editar -->
+                <button id="btnEditSubtask" type="button" class="btn btn-secondary">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <!-- Boton de eliminar  -->
+                <button type="button" class="btn btn-danger">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </label>
+
+            </div>
+            <!-- Fin de checklist -->
+            <!-- Boton para editar -->
+            <button id="btnEditTask" class="btn btn-primary mt-2">Editar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>

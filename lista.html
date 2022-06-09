@@ -224,21 +224,31 @@
 
             <!-- Checklist -->
             <div class="list-group mb-3">
+              <!-- Aqui inicia una subtarea -->
               <label class="list-group-item">
-                <input class="form-check-input me-1" type="checkbox" value="">
-                Subtarea un poco mas grande para calar esta cosa
-                <!-- Boton de editar -->
-                <button id="btnEditSubtask" type="button" class="btn btn-secondary">
-                  <i class="bi bi-pencil"></i>
-                </button>
-                <!-- Boton de eliminar  -->
-                <button type="button" class="btn btn-danger">
-                  <i class="bi bi-trash"></i>
-                </button>
+                <div class="row">
+                  <div class="col-10">
+                    <input class="form-check-input me-1" type="checkbox" value="">
+                    Subtarea un poco mas grande para calar esta cosa 
+                  </div>
+                  <div class="col-2">
+                    <span class="btn-group-sm">
+                      <!-- Boton de editar -->
+                      <button id="btnEditSubtask" type="button" class="btn btn-secondary">
+                        <i class="bi bi-pencil"></i>
+                      </button>
+                      <!-- Boton de eliminar  -->
+                      <button type="button" class="btn btn-danger">
+                        <i class="bi bi-trash"></i>
+                      </button>
+                    </span>
+                  </div>
+                </div>
               </label>
-
+              <!-- Aqui termina una subtarea -->
             </div>
             <!-- Fin de checklist -->
+
             <!-- Boton para editar -->
             <button id="btnEditTask" class="btn btn-primary mt-2">Editar</button>
           </div>
