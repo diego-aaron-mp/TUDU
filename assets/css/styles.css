@@ -1,5 +1,7 @@
 /* Importar normalize.css */
 @import url(normalize.css);
+/* Importar colores de scss */
+@import url(colores.css);
 
 
 * {
