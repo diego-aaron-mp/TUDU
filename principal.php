@@ -1,10 +1,12 @@
 <?php
-include 'assets/config/conexion.php';
+require_once 'assets/config/config.php';
+require_once 'assets/config/functions.php';
+$conexion = connect($server,$port,$db,$user,$pass);
 
-$resultado = mysqli_query($link, "SELECT * FROM lista");
-$resultado = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+if(!$conexion){
+    die("Conexion fallida: " . mysqli_connect_error());
+}
 
-print_r($resultado);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,7 +46,7 @@ print_r($resultado);
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <a class="dropdown-item" href="#">Perfil</a>
-              <a class="dropdown-item" href="#">Cerrar sesión</a>
+              <a class="dropdown-item" href="./logout.php">Cerrar sesión</a>
             </div>
           </div>
           <!-- Fin de Dropdown de usuario -->
