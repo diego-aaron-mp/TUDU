@@ -30,11 +30,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
     // Redirigir al login
     header('Location: index.php');
-
     
   } else {
     // Imprime ventana de alerta
-    echo "<script>alert('Usuario ya existente');</script>";
+    echo "<script>alert('Usuario ya existente.');</script>";
   }
 }
 

@@ -2,10 +2,21 @@
 require_once 'assets/config/config.php';
 require_once 'assets/config/functions.php';
 $conexion = connect($server,$port,$db,$user,$pass);
+session_start();
 
 if(!$conexion){
     die("Conexion fallida: " . mysqli_connect_error());
 }
+// Obtener el id de la sesion actual
+$id = $_SESSION['idUsuario'];
+
+
+
+// Hacer consulta de las lista del usuario
+$sql = "SELECT * FROM lista WHERE Usuario_idUsuario = '" . $id . "'";
+$query = $conexion->prepare($sql);
+$query->execute();
+$resultado = $query->fetchAll();
 
 ?>
 <!DOCTYPE html>
@@ -226,9 +237,9 @@ if(!$conexion){
   <!-- JQuery -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <!-- CreateList Script -->
-  <script src="/assets/scripts/createList.js"></script>
+  <script src="./assets/scripts/createList.js"></script>
 
-  <script src="/assets/scripts/prubas.js"></script>
+
 </body>
 
 </html>

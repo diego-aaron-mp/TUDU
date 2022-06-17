@@ -41,8 +41,8 @@
 
             // Enviar formulario si todos los campos son validos
             if (listName.classList.contains('is-valid') && listObjective.classList.contains('is-valid')) {
-                // $('#createListForm').submit();
-
+                // Redireccionar a crearLista.php
+                window.location.href = 'crearLista.php?name=' + listName.value + '&objective=' + listObjective.value;
                 // Limpiar campos
                 listName.value = '';
                 listObjective.value = '';
@@ -53,8 +53,6 @@
                 listObjective.classList.remove('is-valid');
                 listObjective.classList.remove('is-invalid');
 
-                // Cerrar modal
-                $('#createListModal').modal('hide');
             }
 
         });
