@@ -62,19 +62,20 @@
     $(document).on('click', '#btnEliminarLista', function () {
         // Buscar el id por el name del boton
         var idLista = $(this).attr('name');
-
+        // Imprimir idLista en consola
         // Recortar la cadena "lista?" de idLista
         idLista = idLista.substring(6);    
-
+        
+        console.log(idLista);
         // Abrir modal al dar click en boton
         $('#deleteListModal').modal('show');
         // Si da click en el boton btnSubmitDeleteList
         $('#btnSubmitDeleteList').click(function () {
-            alert("Chacarron macarron "+ idLista );
             // Redireccionar a eliminarLista.php
-            // window.location.href = 'eliminarLista.php?id=' + $(this).data('id');
+            window.location.href = 'eliminarLista.php?id=' + idLista;
+            idLista = '';
         });
-
+        
         // Limpiar el id al cerrar el modal
         $('#deleteListModal').on('hidden.bs.modal', function () {
             idLista = '';
