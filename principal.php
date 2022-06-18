@@ -120,16 +120,18 @@ $resultado = $query->fetchAll();
         <div class="col-12 col-md-6 col-lg-4">
           <div class="card">
             <div class="card-body">
+              <!-- Id oculto -->
+              <input type="hidden" id="idLista" value="">
               <h5 class="card-title"><?php echo $value['nombreLista']; ?></h5>
               <p class="card-text"><?php echo $value['objetivoLista']; ?></p>
               <a href="#" class="btn btn-primary">
                 <i class="bi bi-arrow-right"></i>
                 Ver más
               </a>
-              <a href="#" class="btn btn-danger">
+              <button id="btnEliminarLista" name="lista?<?php echo $value['idLista']; ?>" class="btn btn-danger">
                 <i class="bi bi-trash"></i>
                 Eliminar
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -144,7 +146,7 @@ $resultado = $query->fetchAll();
   <div class="modal fade" id="createListModal" tabindex="-1" role="dialog" aria-labelledby="createListModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header bg-secondary">
           <h5 class="modal-title" id="createListModalLabel">Crear nueva lista</h5>
           <button type="button" id="btnCloseCreateList" class="close btn-close" data-dismiss="modal" aria-label="Close">
           </button>
@@ -230,6 +232,32 @@ $resultado = $query->fetchAll();
     </div>
   </div>
 
+  <!-- Modal para eliminar lista -->
+  <div class="modal fade" id="deleteListModal" tabindex="-1" role="dialog" aria-labelledby="deleteListModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-danger">
+          <h5 class="modal-title" id="deleteListModalLabel">
+          <i class="bi bi-exclamation-triangle-fill"></i>
+            Eliminar lista
+          </h5>
+          <button type="button" id="btnCloseDeleteList" class="close btn-close" data-dismiss="modal" aria-label="Close">
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>
+            ¿Estás seguro que quieres eliminar la lista?
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="btnSubmitDeleteList" class="btn btn-danger">
+          <i class="bi bi-trash"></i>
+          Eliminar
+        </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
   <!-- Bootstrap -->
@@ -238,7 +266,8 @@ $resultado = $query->fetchAll();
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <!-- CreateList Script -->
   <script src="./assets/scripts/createList.js"></script>
-
+  <!-- Script de pruebas -->
+  <!-- <script src="./assets/scripts/pruebas.js"></script> -->
 
 </body>
 

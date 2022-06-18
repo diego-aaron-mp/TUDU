@@ -58,4 +58,28 @@
         });
 
     });
+
+    $(document).on('click', '#btnEliminarLista', function () {
+        // Buscar el id por el name del boton
+        var idLista = $(this).attr('name');
+
+        // Recortar la cadena "lista?" de idLista
+        idLista = idLista.substring(6);    
+
+        // Abrir modal al dar click en boton
+        $('#deleteListModal').modal('show');
+        // Si da click en el boton btnSubmitDeleteList
+        $('#btnSubmitDeleteList').click(function () {
+            alert("Chacarron macarron "+ idLista );
+            // Redireccionar a eliminarLista.php
+            // window.location.href = 'eliminarLista.php?id=' + $(this).data('id');
+        });
+
+        // Limpiar el id al cerrar el modal
+        $('#deleteListModal').on('hidden.bs.modal', function () {
+            idLista = '';
+        });
+    });
+
+
 })();
