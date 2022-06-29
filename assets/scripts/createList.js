@@ -41,18 +41,29 @@
 
             // Enviar formulario si todos los campos son validos
             if (listName.classList.contains('is-valid') && listObjective.classList.contains('is-valid')) {
-                // Redireccionar a crearLista.php
-                window.location.href = 'crearLista.php?name=' + listName.value + '&objective=' + listObjective.value;
-                // Limpiar campos
-                listName.value = '';
-                listObjective.value = '';
+                // Redireccionar a crearLista.php con ajax
+                $.ajax({
+                    url: './crearLista.php',
+                    type: 'POST',
+                    data: {
+                        listName: listName.value,
+                        listObjective: listObjective.value
+                    },
+                    // Mostrar las listas del usuario
+                    success: function (response) {
+                        $('#createListModal').modal('hide');
+                        // Limpiar campos
+                        listName.value = '';
+                        listObjective.value = '';
 
-                // Quitar clases de validacion
-                listName.classList.remove('is-valid');
-                listName.classList.remove('is-invalid');
-                listObjective.classList.remove('is-valid');
-                listObjective.classList.remove('is-invalid');
+                        // Quitar clases de validacion
+                        listName.classList.remove('is-valid');
+                        listName.classList.remove('is-invalid');
+                        listObjective.classList.remove('is-valid');
+                        listObjective.classList.remove('is-invalid');
+                    }
 
+                });
             }
 
         });
@@ -62,10 +73,10 @@
     $(document).on('click', '#btnEliminarLista', function () {
         // Buscar el id por el name del boton
         var idLista = $(this).attr('name');
-        
+
         // Recortar la cadena "lista?" de idLista
-        idLista = idLista.substring(6);    
-        
+        idLista = idLista.substring(6);
+
         console.log(idLista);
         // Abrir modal al dar click en boton
         $('#deleteListModal').modal('show');
@@ -75,7 +86,7 @@
             window.location.href = 'eliminarLista.php?idlista=' + idLista;
             idLista = '';
         });
-        
+
         // Limpiar el id al cerrar el modal
         $('#deleteListModal').on('hidden.bs.modal', function () {
             idLista = '';

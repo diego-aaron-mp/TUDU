@@ -113,7 +113,7 @@ $resultado = $query->fetchAll();
   <!-- Contenido -->
   <!-- Card de Lista -->
   <div class="container mt-3 mb-3">
-    <div class="row g-3">
+    <div id="divLists" class="row g-3">
 
     <?php foreach ($resultado as $key => $value) : ?>
         <!-- Aqui inicia una card -->
