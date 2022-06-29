@@ -62,7 +62,7 @@
     $(document).on('click', '#btnEliminarLista', function () {
         // Buscar el id por el name del boton
         var idLista = $(this).attr('name');
-        // Imprimir idLista en consola
+        
         // Recortar la cadena "lista?" de idLista
         idLista = idLista.substring(6);    
         
@@ -72,7 +72,7 @@
         // Si da click en el boton btnSubmitDeleteList
         $('#btnSubmitDeleteList').click(function () {
             // Redireccionar a eliminarLista.php
-            window.location.href = 'eliminarLista.php?id=' + idLista;
+            window.location.href = 'eliminarLista.php?idlista=' + idLista;
             idLista = '';
         });
         

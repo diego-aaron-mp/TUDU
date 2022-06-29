@@ -1,5 +1,37 @@
 <?php
-include 'assets/config/conexion.php';
+require_once 'assets/config/config.php';
+require_once 'assets/config/functions.php';
+$conexion = connect($server, $port, $db, $user, $pass);
+session_start();
+
+if (!$conexion) {
+  die("Conexion fallida: " . mysqli_connect_error());
+}
+
+// Obtener el id de la sesion actual
+$idUsuario = $_SESSION['idUsuario'];
+
+// Obtener el id de la lista seleccionada
+$idLista = $_GET['lista'];
+
+// Obtener el nombre y el objetivo de la lista
+$sql = "SELECT DISTINCT objetivoLista, nombreLista FROM lista WHERE idLista =" . $idLista . "";
+$query = $conexion->prepare($sql);
+$query->execute();
+$objetivo = $query->fetchAll();
+
+// Obtener las tareas de la lista
+$sql = "SELECT * FROM tarea WHERE idLista =" . $idLista . "";
+$query = $conexion->prepare($sql);
+$query->execute();
+$tareas = $query->fetchAll();
+
+// Obtener las notas de la lista
+$sql = "SELECT * FROM nota WHERE Lista_idLista =" . $idLista . "";
+$query = $conexion->prepare($sql);
+$query->execute();
+$notas = $query->fetchAll();
+
 
 ?>
 <!DOCTYPE html>
@@ -25,10 +57,8 @@ include 'assets/config/conexion.php';
   <nav class="navbar navbar-expand-lg navbar-light bg-primary shadow sticky-top">
     <div class="container-fluid">
       <!-- Logo para ir a Inicio -->
-      <a class="navbar-brand text-white fw-bold" href="#"> <img src="./assets/images/TuduComprimido.png"
-          alt="Ir a inicio" class="img-fluid goHome">TUDÚ</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
-        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <a class="navbar-brand text-white fw-bold" href="#"> <img src="./assets/images/TuduComprimido.png" alt="Ir a inicio" class="img-fluid goHome">TUDÚ</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarText">
@@ -36,8 +66,7 @@ include 'assets/config/conexion.php';
 
           <!-- Dropdown de Usuario -->
           <div class="dropdown me-2 mb-1 mt-1">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-              data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="bi bi-person-fill"></i>
               Usuario
             </button>
@@ -50,8 +79,7 @@ include 'assets/config/conexion.php';
 
           <!-- Dropdown de Listas -->
           <div class="dropdown me-2 mb-1 mt-1"">
-              <button class=" btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button class=" btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="bi bi-list-check"></i>
             Listas
             </button>
@@ -65,8 +93,7 @@ include 'assets/config/conexion.php';
 
           <!-- Botón de para abir el modal de frase -->
           <div>
-            <button type="button" class="btn btn-secondary me-2 mb-1 mt-1" data-bs-toggle="modal"
-              data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-secondary me-2 mb-1 mt-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
               <i class="bi bi-brightness-high-fill"></i>
               Frase
             </button>
@@ -75,8 +102,7 @@ include 'assets/config/conexion.php';
 
           <!-- Boton para abrir el modal de consejo -->
           <div>
-            <button type="button" class="btn btn-secondary me-2 mb-1 mt-1" data-bs-toggle="modal"
-              data-bs-target="#exampleModal2">
+            <button type="button" class="btn btn-secondary me-2 mb-1 mt-1" data-bs-toggle="modal" data-bs-target="#exampleModal2">
               <i class="bi bi-lightbulb-fill"></i>
               Consejo
             </button>
@@ -85,8 +111,7 @@ include 'assets/config/conexion.php';
 
           <!-- Boton para ocultar tareas completadas -->
           <div>
-            <button type="button" class="btn btn-secondary me-2 mb-1 mt-1" data-bs-toggle="modal"
-              data-bs-target="#exampleModal3">
+            <button type="button" class="btn btn-secondary me-2 mb-1 mt-1" data-bs-toggle="modal" data-bs-target="#exampleModal3">
               <i class="bi bi-eye-fill"></i>
               Completadas
             </button>
@@ -102,16 +127,27 @@ include 'assets/config/conexion.php';
   <!-- Jumbotron del objetivo de la lista -->
   <div class="p-5 jumbotron jumbotron-fluid mb-2 mt-2">
     <div class="container-fluid py-2">
-      <h1 class="display-5 fw-bold"><i class="bi bi-trophy-fill"> </i>Objetivo
+      <!-- Titulo de la lista -->
+      <h1 class="display-3 text-center mb-3">
+        <?php foreach ($objetivo as $key => $value) : ?>
+          <?php echo $value['nombreLista']; ?>
+        <?php endforeach; ?>
+      </h1>
+      <!-- Una linea -->
+      <hr class="my-4">
+
+      <h2 class="display-5 fw-bold"><i class="bi bi-trophy-fill"> </i>Objetivo
         <!-- Boton para editar el objetivo -->
-        <button id="btnEditObjective" class="btn btn-secondary btn-lg btn-block" type="button" data-toggle="modal"
-          data-target="#exampleModal">
+        <button id="btnEditObjective" class="btn btn-secondary btn-lg btn-block" type="button" data-toggle="modal" data-target="#exampleModal">
           <i class="bi bi-pencil"></i>
         </button>
-      </h1>
-      <p class="col-md-12 fs-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque voluptas, architecto,
-        explicabo vero provident quos repudiandae saepe asperiores fugit dolore, assumenda facilis debitis possimus
-        animi. Modi exercitationem eum quasi voluptates.</p>
+      </h2>
+      <p class="col-md-12 fs-4">
+        <!-- Imprimir objetivoLista de la variable objetivo con php  -->
+        <?php foreach ($objetivo as $key => $value) : ?>
+          <?php echo $value['objetivoLista']; ?>
+        <?php endforeach; ?>
+      </p>
     </div>
 
   </div>
@@ -160,13 +196,11 @@ include 'assets/config/conexion.php';
             <!-- Input para agregar nueva tarea -->
             <h5 class="card-title">Agregar nueva tarea</h5>
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="Agregar tarea" aria-label="Agregar subtarea"
-                aria-describedby="basic-addon2">
+              <input type="text" class="form-control" placeholder="Agregar tarea" aria-label="Agregar subtarea" aria-describedby="basic-addon2">
             </div>
             <div class="input-group mt-3">
               <!-- Text area para escribir la descipcion de la nueva tarea -->
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"
-                placeholder="Descripción de la tarea"></textarea>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="1" placeholder="Descripción de la tarea"></textarea>
             </div>
             <div class="input-group mt-3">
               <!-- Boton para agregar la nueva tarea -->
@@ -186,13 +220,11 @@ include 'assets/config/conexion.php';
             <!-- Input para agregar nueva nota -->
             <h5 class="card-title">Agregar nueva nota</h5>
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="Agregar nota" aria-label="Agregar nota"
-                aria-describedby="basic-addon2">
+              <input type="text" class="form-control" placeholder="Agregar nota" aria-label="Agregar nota" aria-describedby="basic-addon2">
             </div>
             <div class="input-group mt-3">
               <!-- Text area para escribir la descipcion de la nueva nota -->
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"
-                placeholder="Descripción de la nota"></textarea>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="1" placeholder="Descripción de la nota"></textarea>
             </div>
             <div class="input-group mt-3">
               <!-- Boton para agregar la nueva nota -->
@@ -225,8 +257,7 @@ include 'assets/config/conexion.php';
             <p class="card-text mt-1">Descripcion de la tarea</p>
             <h6 class="card-text">Subtareas
               <!-- Boton para agregar subtareas -->
-              <button type="button" id="btnAddSubtask" class="btn btn-primary btn-sm" data-toggle="modal"
-                data-target="#exampleModal">
+              <button type="button" id="btnAddSubtask" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
                 <i class="bi bi-plus"></i>
               </button>
             </h6>
@@ -271,30 +302,32 @@ include 'assets/config/conexion.php';
   <div class="container mt-3 mb-3">
     <div class="row g-3">
       <!-- Aqui inicia una card -->
+      <?php foreach ($notas as $key => $value) : ?>
       <div class="col-12 col-md-12 col-lg-12">
         <div class="card">
           <!-- Card header -->
           <div class="modal-header">
             <!-- Titulo de la card -->
-            <h5 class="card-title">Nota</h5>
+            <h5 class="card-title"><?php echo $value['tituloNota']; ?></h5>
             <!-- Boton de eliminar  -->
-            <button type="button" class="btn btn-close">
+            <button type="button" id="btnDeleteNote" name="nota?<?php echo $value['idNota']; ?>" class="btn btn-close">
             </button>
           </div>
           <div class="card-body">
-            <p class="card-text">Descripcion de la nota</p>
+            <p class="card-text"><?php echo $value['descripcionNota']; ?></p>
             <!-- Boton para editar -->
             <button id="btnEditNote" type="button" class="btn btn-primary mt-2">Editar</button>
           </div>
         </div>
       </div>
+      <!-- Aqui termina -->
+      <?php endforeach; ?>
     </div>
   </div>
 
   <!-- Modales -->
   <!-- Modal para editar tareas-->
-  <div class="modal fade" id="editTaskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+  <div class="modal fade" id="editTaskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -308,15 +341,13 @@ include 'assets/config/conexion.php';
           <!-- Input para editar el titulo de la tarea -->
           <div class="form-group">
             <label for="inputTitleTask">Titulo de la tarea</label>
-            <input type="text" class="form-control" id="inputTitleTask" aria-describedby="inputTitleTask"
-              placeholder="Ej. Tarea de estudio">
+            <input type="text" class="form-control" id="inputTitleTask" aria-describedby="inputTitleTask" placeholder="Ej. Tarea de estudio">
           </div>
 
           <!-- Text area para editar la descripcion de la tarea -->
           <div class="form-group">
             <label for="inputDescriptionTask">Descripcion de la tarea</label>
-            <textarea class="form-control" id="inputDescriptionTask" rows="3"
-              placeholder="Ej. Estudiar para el examen de final de semestre"></textarea>
+            <textarea class="form-control" id="inputDescriptionTask" rows="3" placeholder="Ej. Estudiar para el examen de final de semestre"></textarea>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -328,8 +359,7 @@ include 'assets/config/conexion.php';
   </div>
 
   <!-- Modal para editar subtareas -->
-  <div class="modal fade" id="editSubtaskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+  <div class="modal fade" id="editSubtaskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -343,8 +373,7 @@ include 'assets/config/conexion.php';
           <!-- Input para editar el titulo de la subtarea -->
           <div class="form-group">
             <label for="inputTitleSubtask">Titulo de la subtarea</label>
-            <input type="text" class="form-control" id="inputTitleSubtask" aria-describedby="inputTitleSubtask"
-              placeholder="Ej. Subtarea de estudio">
+            <input type="text" class="form-control" id="inputTitleSubtask" aria-describedby="inputTitleSubtask" placeholder="Ej. Subtarea de estudio">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -357,8 +386,7 @@ include 'assets/config/conexion.php';
 
 
   <!-- Modal para editar una nota -->
-  <div class="modal fade" id="editModalNote" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+  <div class="modal fade" id="editModalNote" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -372,15 +400,13 @@ include 'assets/config/conexion.php';
 
           <div class="form-group">
             <label for="inputTitleNote">Titulo de la nota</label>
-            <input type="text" class="form-control" id="inputTitleNote" aria-describedby="inputTitleNote"
-              placeholder="Ej. Nota de estudio">
+            <input type="text" class="form-control" id="inputTitleNote" aria-describedby="inputTitleNote" placeholder="Ej. Nota de estudio">
           </div>
 
           <!-- Input para editar la descripcion de la nota -->
           <div class="form-group">
             <label for="inputDescriptionNote">Descripcion de la nota</label>
-            <textarea class="form-control" id="inputDescriptionNote" rows="3"
-              placeholder="Ej. Estudio de inglés"></textarea>
+            <textarea class="form-control" id="inputDescriptionNote" rows="3" placeholder="Ej. Estudio de inglés"></textarea>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -392,8 +418,7 @@ include 'assets/config/conexion.php';
   </div>
 
   <!-- Modal para editar el objetivo -->
-  <div class="modal fade" id="editModalObjective" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+  <div class="modal fade" id="editModalObjective" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -407,8 +432,7 @@ include 'assets/config/conexion.php';
           <!-- Input para editar la descripcion del objetivo -->
           <div class="form-group">
             <label for="inputDescriptionObjective">Descripcion del objetivo</label>
-            <textarea class="form-control" id="inputDescriptionObjective" rows="3"
-              placeholder="Ej. Estudiar para el examen de final de semestre"></textarea>
+            <textarea class="form-control" id="inputDescriptionObjective" rows="3" placeholder="Ej. Estudiar para el examen de final de semestre"></textarea>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -421,8 +445,7 @@ include 'assets/config/conexion.php';
 
 
   <!-- Modal para agregar una subtarea -->
-  <div class="modal fade" id="addSubtaskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+  <div class="modal fade" id="addSubtaskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -435,8 +458,7 @@ include 'assets/config/conexion.php';
           <!-- Input para agregar el titulo de la subtarea -->
           <div class="form-group">
             <label for="inputTitleSubtask">Titulo de la subtarea</label>
-            <input type="text" class="form-control" id="inputTitleSubtask" aria-describedby="inputTitleSubtask"
-              placeholder="Ej. Subtarea de estudio">
+            <input type="text" class="form-control" id="inputTitleSubtask" aria-describedby="inputTitleSubtask" placeholder="Ej. Subtarea de estudio">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -449,20 +471,17 @@ include 'assets/config/conexion.php';
 
 
   <!-- Bootstrap -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   <!-- JQuery -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <!-- Temporizador -->
-  <script src="/assets/scripts/pomodoroTimer.js"></script>
+  <script src="./assets/scripts/pomodoroTimer.js"></script>
 
-  <script src="/assets/scripts/editTask.js"></script>
-  <script src="/assets/scripts/editSubtask.js"></script>
-  <script src="/assets/scripts/editObjective.js"></script>
+  <script src="./assets/scripts/editTask.js"></script>
+  <script src="./assets/scripts/editSubtask.js"></script>
+  <script src="./assets/scripts/editObjective.js"></script>
 
-  <script src="/assets/scripts/prubas.js"></script>
+  <script src="./assets/scripts/pruebas.js"></script>
 </body>
 
 </html>

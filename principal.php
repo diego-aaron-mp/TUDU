@@ -124,7 +124,7 @@ $resultado = $query->fetchAll();
               <input type="hidden" id="idLista" value="">
               <h5 class="card-title"><?php echo $value['nombreLista']; ?></h5>
               <p class="card-text"><?php echo $value['objetivoLista']; ?></p>
-              <a href="#" class="btn btn-primary">
+              <a href="./lista.php?lista=<?php echo $value['idLista']; ?>" class="btn btn-primary">
                 <i class="bi bi-arrow-right"></i>
                 Ver más
               </a>
@@ -147,7 +147,10 @@ $resultado = $query->fetchAll();
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header bg-secondary">
-          <h5 class="modal-title" id="createListModalLabel">Crear nueva lista</h5>
+          <h5 class="modal-title text-white" id="createListModalLabel">
+          <i class="bi bi-plus-lg"></i>
+            Crear nueva lista
+          </h5>
           <button type="button" id="btnCloseCreateList" class="close btn-close" data-dismiss="modal" aria-label="Close">
           </button>
         </div>

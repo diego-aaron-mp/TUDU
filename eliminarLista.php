@@ -14,7 +14,7 @@
     $id = $_SESSION['idUsuario'];
     
     // Obtener el id de la lista a eliminar
-    $idLista = $_GET['id'];
+    $idLista = $_GET['idlista'];
 
     // Eliminar la lista de la base de datos
     $sql = "DELETE FROM lista WHERE idLista = '" . $idLista . "'";
@@ -24,3 +24,4 @@
     
     // Recargar la pagina
     header('Location: ./principal.php');
+?>
