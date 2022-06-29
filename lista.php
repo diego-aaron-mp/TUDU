@@ -303,24 +303,24 @@ $notas = $query->fetchAll();
     <div class="row g-3">
       <!-- Aqui inicia una card -->
       <?php foreach ($notas as $key => $value) : ?>
-      <div class="col-12 col-md-12 col-lg-12">
-        <div class="card">
-          <!-- Card header -->
-          <div class="modal-header">
-            <!-- Titulo de la card -->
-            <h5 class="card-title"><?php echo $value['tituloNota']; ?></h5>
-            <!-- Boton de eliminar  -->
-            <button type="button" id="btnDeleteNote" name="nota?<?php echo $value['idNota']; ?>" class="btn btn-close">
-            </button>
-          </div>
-          <div class="card-body">
-            <p class="card-text"><?php echo $value['descripcionNota']; ?></p>
-            <!-- Boton para editar -->
-            <button id="btnEditNote" type="button" class="btn btn-primary mt-2">Editar</button>
+        <div class="col-12 col-md-12 col-lg-12">
+          <div class="card">
+            <!-- Card header -->
+            <div class="modal-header">
+              <!-- Titulo de la card -->
+              <h5 class="card-title"><?php echo $value['tituloNota']; ?></h5>
+              <!-- Boton de eliminar  -->
+              <button type="button" id="btnDeleteNote" name="nota?<?php echo $value['idNota']; ?>" class="btn btn-close">
+              </button>
+            </div>
+            <div class="card-body">
+              <p class="card-text"><?php echo $value['descripcionNota']; ?></p>
+              <!-- Boton para editar -->
+              <button id="btnEditNote" type="button" class="btn btn-primary mt-2">Editar</button>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- Aqui termina -->
+        <!-- Aqui termina -->
       <?php endforeach; ?>
     </div>
   </div>
@@ -417,7 +417,7 @@ $notas = $query->fetchAll();
     </div>
   </div>
 
-  <!-- Modal para editar el objetivo -->
+  <!-- Modal para editar el titulo y el objetivo -->
   <div class="modal fade" id="editModalObjective" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -427,18 +427,22 @@ $notas = $query->fetchAll();
             <span aria-hidden="true"></span>
           </button>
         </div>
-        <div class="modal-body">
-
-          <!-- Input para editar la descripcion del objetivo -->
-          <div class="form-group">
-            <label for="inputDescriptionObjective">Descripcion del objetivo</label>
-            <textarea class="form-control" id="inputDescriptionObjective" rows="3" placeholder="Ej. Estudiar para el examen de final de semestre"></textarea>
+        <!-- <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST"> -->
+          <div class="modal-body">
+            <!-- Input para editar la descripcion del objetivo -->
+            <div class="form-group">
+              <!-- Input del titulo de la lista -->
+              <label for="inputTitle">Titulo de la lista</label>
+              <input type="text" class="form-control" id="inputTitle" aria-describedby="inputTitle" placeholder="Ej. Objetivo de estudio">
+              <!-- Input del Objetivo -->
+              <label for="inputObjective">Descripcion del objetivo</label>
+              <textarea class="form-control" id="inputObjective" rows="3" placeholder="Ej. Estudiar para el examen de final de semestre"></textarea>
+            </div>
+            <div class="modal-footer">
+              <button id="btnSubmitEditObjective" type="submit" class="btn btn-primary">Guardar</button>
+            </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary">Guardar</button>
-          </div>
-        </div>
+        <!-- </form> -->
       </div>
     </div>
   </div>
