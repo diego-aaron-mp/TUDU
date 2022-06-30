@@ -13,15 +13,11 @@
     // Obtener el id de la sesion actual
     $id = $_SESSION['idUsuario'];
     
-    // Obtener el id de la lista a eliminar
-    $idLista = $_GET['idlista'];
+    // Obtener el id de la lista a eliminar con POST
+    $idLista = $_POST['idLista'];
 
     // Eliminar la lista de la base de datos
     $sql = "DELETE FROM lista WHERE idLista = '" . $idLista . "'";
     $query = $conexion->prepare($sql);
     $query->execute();
-    
-    
-    // Recargar la pagina
-    header('Location: ./principal.php');
 ?>

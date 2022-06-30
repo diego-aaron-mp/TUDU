@@ -87,8 +87,22 @@
         // Si da click en el boton btnSubmitDeleteList
         $('#btnSubmitDeleteList').click(function () {
             // Redireccionar a eliminarLista.php
-            window.location.href = 'eliminarLista.php?idlista=' + idLista;
-            idLista = '';
+            // window.location.href = 'eliminarLista.php?idlista=' + idLista;
+
+            // Redireccionar a eliminarLista con ajax
+            $.ajax({
+                url: './eliminarLista.php',
+                type: 'POST',
+                data: {
+                    idLista: idLista
+                },
+                // Mostrar las listas del usuario
+                success: function (response) {
+                    $('#deleteListModal').modal('hide');
+                    $('#divLists').load('./verListas.php');
+                    idLista = '';
+                }
+            });
         });
 
         // Limpiar el id al cerrar el modal
