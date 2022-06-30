@@ -5,6 +5,9 @@
         listObjective = document.getElementById('inputObjective');
 
     $(document).ready(function () {
+        // Mostrar verListas.php en #divLists con ajax
+        $('#divLists').load('./verListas.php');
+
         //   Abrir modal al dar click en boton
         $('#btnCreateList').click(function () {
             $('#createListModal').modal('show');
@@ -52,6 +55,7 @@
                     // Mostrar las listas del usuario
                     success: function (response) {
                         $('#createListModal').modal('hide');
+                        $('#divLists').load('./verListas.php');
                         // Limpiar campos
                         listName.value = '';
                         listObjective.value = '';
