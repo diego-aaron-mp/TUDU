@@ -26,12 +26,6 @@ $query = $conexion->prepare($sql);
 $query->execute();
 $tareas = $query->fetchAll();
 
-// Obtener las notas de la lista
-$sql = "SELECT * FROM nota WHERE Lista_idLista =" . $idLista . "";
-$query = $conexion->prepare($sql);
-$query->execute();
-$notas = $query->fetchAll();
-
 
 ?>
 <!DOCTYPE html>
@@ -220,15 +214,15 @@ $notas = $query->fetchAll();
             <!-- Input para agregar nueva nota -->
             <h5 class="card-title">Agregar nueva nota</h5>
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="Agregar nota" aria-label="Agregar nota" aria-describedby="basic-addon2">
+              <input type="text" id="inputNoteTitle" class="form-control" placeholder="Agregar nota" aria-label="Agregar nota" aria-describedby="basic-addon2">
             </div>
             <div class="input-group mt-3">
               <!-- Text area para escribir la descipcion de la nueva nota -->
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="1" placeholder="Descripción de la nota"></textarea>
+              <textarea id="inputNoteDescription" class="form-control" id="exampleFormControlTextarea1" rows="1" placeholder="Descripción de la nota"></textarea>
             </div>
             <div class="input-group mt-3">
               <!-- Boton para agregar la nueva nota -->
-              <button type="button" class="btn btn-primary">
+              <button id="btnSubmitNote" type="button" class="btn btn-primary">
                 <i class="bi bi-plus-lg"></i>
                 Agregar
               </button>
@@ -300,28 +294,8 @@ $notas = $query->fetchAll();
 
   <!-- Notas -->
   <div class="container mt-3 mb-3">
-    <div class="row g-3">
-      <!-- Aqui inicia una card -->
-      <?php foreach ($notas as $key => $value) : ?>
-        <div class="col-12 col-md-12 col-lg-12">
-          <div class="card">
-            <!-- Card header -->
-            <div class="modal-header">
-              <!-- Titulo de la card -->
-              <h5 class="card-title"><?php echo $value['tituloNota']; ?></h5>
-              <!-- Boton de eliminar  -->
-              <button type="button" id="btnDeleteNote" name="nota?<?php echo $value['idNota']; ?>" class="btn btn-close">
-              </button>
-            </div>
-            <div class="card-body">
-              <p class="card-text"><?php echo $value['descripcionNota']; ?></p>
-              <!-- Boton para editar -->
-              <button id="btnEditNote" type="button" class="btn btn-primary mt-2">Editar</button>
-            </div>
-          </div>
-        </div>
-        <!-- Aqui termina -->
-      <?php endforeach; ?>
+    <div class="row g-3" id="divNotes">
+     
     </div>
   </div>
 
@@ -428,20 +402,20 @@ $notas = $query->fetchAll();
           </button>
         </div>
         <!-- <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST"> -->
-          <div class="modal-body">
-            <!-- Input para editar la descripcion del objetivo -->
-            <div class="form-group">
-              <!-- Input del titulo de la lista -->
-              <label for="inputTitle">Titulo de la lista</label>
-              <input type="text" class="form-control" id="inputTitle" aria-describedby="inputTitle" placeholder="Ej. Objetivo de estudio">
-              <!-- Input del Objetivo -->
-              <label for="inputObjective">Descripcion del objetivo</label>
-              <textarea class="form-control" id="inputObjective" rows="3" placeholder="Ej. Estudiar para el examen de final de semestre"></textarea>
-            </div>
-            <div class="modal-footer">
-              <button id="btnSubmitEditObjective" type="submit" class="btn btn-primary">Guardar</button>
-            </div>
+        <div class="modal-body">
+          <!-- Input para editar la descripcion del objetivo -->
+          <div class="form-group">
+            <!-- Input del titulo de la lista -->
+            <label for="inputTitle">Titulo de la lista</label>
+            <input type="text" class="form-control" id="inputTitle" aria-describedby="inputTitle" placeholder="Ej. Objetivo de estudio">
+            <!-- Input del Objetivo -->
+            <label for="inputObjective">Descripcion del objetivo</label>
+            <textarea class="form-control" id="inputObjective" rows="3" placeholder="Ej. Estudiar para el examen de final de semestre"></textarea>
           </div>
+          <div class="modal-footer">
+            <button id="btnSubmitEditObjective" type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </div>
         <!-- </form> -->
       </div>
     </div>
