@@ -81,14 +81,10 @@
         // Recortar la cadena "lista?" de idLista
         idLista = idLista.substring(6);
 
-        console.log(idLista);
         // Abrir modal al dar click en boton
         $('#deleteListModal').modal('show');
         // Si da click en el boton btnSubmitDeleteList
         $('#btnSubmitDeleteList').click(function () {
-            // Redireccionar a eliminarLista.php
-            // window.location.href = 'eliminarLista.php?idlista=' + idLista;
-
             // Redireccionar a eliminarLista con ajax
             $.ajax({
                 url: './eliminarLista.php',

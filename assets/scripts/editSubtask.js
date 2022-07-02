@@ -63,6 +63,28 @@
                 });
             }
         });
+
+    }
+    );
+
+    $(document).on('click', '#btnDeleteNote', function () {
+        var idNota = $(this).attr('name');
+
+        // Recortar la cadena "nota?"
+        idNota = idNota.substring(5);
+
+        $.ajax({
+            url: './eliminarNota.php',
+            type: 'GET',
+            data: {
+                idNota: idNota
+            },
+            // Mostrar las notas del usuario
+            success: function (response) {
+                // $('#divNotes').load('./verNotas.php?lista=' + idList);
+                idNota = '';
+            }
+        });
     }
     );
 })();
