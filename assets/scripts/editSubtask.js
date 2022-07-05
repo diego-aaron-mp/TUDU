@@ -1,9 +1,11 @@
 // Script para abri modal para editar subtareas
-(function(){
+(function () {
     // Variables
     var inputNoteTitle = document.getElementById('inputNoteTitle'),
-        inputNoteDescription = document.getElementById('inputNoteDescription');
-    
+        inputNoteDescription = document.getElementById('inputNoteDescription'),
+        inputTitle = document.getElementById('inputTitle'),
+        inputObjective = document.getElementById('inputObjective');
+
     // Obtener el id de la lista a travers de la url
     var url = new URL(window.location.href);
     var idList = url.searchParams.get("lista");
@@ -17,6 +19,19 @@
             $('#editSubtaskModal').modal('show');
         }
         );
+
+        // Abre modal de editar objtivo al dar click en boton
+        $('#btnEditObjective').click(function () {
+            $('#editModalObjective').modal('show');
+            // Mostrar datos en inputs
+            inputTitle.value = $('#listTitle').text().trim();
+            inputObjective.value = $('#listObjective').text().trim();
+        });
+
+        // Cerrar el modal al dar click en btnCloseModalObjective
+        $('#btnCloseModalObjective').click(function () {
+            $('#editModalObjective').modal('hide');
+        });
 
         // Al dar click en btnSubmitNote
         $('#btnSubmitNote').click(function () {
@@ -44,6 +59,12 @@
 
             // Enviar formulario si todos los campos son validos
             if (inputNoteTitle.classList.contains('is-valid') && inputNoteDescription.classList.contains('is-valid')) {
+                // Remover las clases de validacion
+                inputNoteTitle.classList.remove('is-valid');
+                inputNoteTitle.classList.remove('is-invalid');
+                inputNoteDescription.classList.remove('is-valid');
+                inputNoteDescription.classList.remove('is-invalid');
+
                 // Redireccionar a crearNota.php con ajax
                 $.ajax({
                     url: './crearNota.php',
@@ -62,6 +83,61 @@
                     }
                 });
             }
+        });
+
+        // Validar el formulario al dar click en boton btnSubmitEditObjective
+        $('#btnSubmitEditObjective').click(function () {
+            // Eliminar espacios en blanco de los campos
+            inputTitle.value = inputTitle.value.trim();
+            inputObjective.value = inputObjective.value.trim();
+
+            // Validar el titulo del objetivo
+            if (inputTitle.value.length < 1) {
+                inputTitle.classList.add('is-invalid');
+                inputTitle.classList.remove('is-valid');
+            } else {
+                inputTitle.classList.add('is-valid');
+                inputTitle.classList.remove('is-invalid');
+            }
+
+            // Validar el objetivo del objetivo
+            if (inputObjective.value.length < 1) {
+                inputObjective.classList.add('is-invalid');
+                inputObjective.classList.remove('is-valid');
+            }
+            else {
+                inputObjective.classList.add('is-valid');
+                inputObjective.classList.remove('is-invalid');
+            }
+
+            // Enviar formulario si todos los campos son validos
+            if (inputTitle.classList.contains('is-valid') && inputObjective.classList.contains('is-valid')) {
+                $.ajax({
+                    url: './editarObjetivo.php',
+                    type: 'POST',
+                    data: {
+                        idList: idList,
+                        inputTitle: inputTitle.value,
+                        inputObjective: inputObjective.value
+                    },
+                    // Mostrar los nuevos datos en el HTML
+                    success: function (response) {
+                        $('#listTitle').text(inputTitle.value);
+                        $('#listObjective').text(inputObjective.value);
+                        $('#editModalObjective').modal('hide');
+                        inputTitle.value = '';
+                        inputObjective.value = '';
+
+                        // Quitar clases de validacion
+                        inputTitle.classList.remove('is-valid');
+                        inputTitle.classList.remove('is-invalid');
+                        inputObjective.classList.remove('is-valid');
+                        inputObjective.classList.remove('is-invalid');
+                    }
+                });
+            }
+
+
         });
 
     }

@@ -122,7 +122,7 @@ $tareas = $query->fetchAll();
   <div class="p-5 jumbotron jumbotron-fluid mb-2 mt-2">
     <div class="container-fluid py-2">
       <!-- Titulo de la lista -->
-      <h1 class="display-3 text-center mb-3">
+      <h1 class="display-3 text-center mb-3" id="listTitle">
         <?php foreach ($objetivo as $key => $value) : ?>
           <?php echo $value['nombreLista']; ?>
         <?php endforeach; ?>
@@ -136,7 +136,7 @@ $tareas = $query->fetchAll();
           <i class="bi bi-pencil"></i>
         </button>
       </h2>
-      <p class="col-md-12 fs-4">
+      <p class="col-md-12 fs-4" id="listObjective">
         <!-- Imprimir objetivoLista de la variable objetivo con php  -->
         <?php foreach ($objetivo as $key => $value) : ?>
           <?php echo $value['objetivoLista']; ?>
@@ -397,7 +397,7 @@ $tareas = $query->fetchAll();
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
-          <button type="button" class="close btn-close" data-dismiss="modal" aria-label="Close">
+          <button type="button" id="btnCloseModalObjective" class="close btn-close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true"></span>
           </button>
         </div>
