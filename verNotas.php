@@ -36,5 +36,4 @@ foreach ($notas as $key => $value) : ?>
         </div>
     </div>
     <!-- Aqui termina -->
-<?php endforeach;
-?>
+<?php endforeach; ?>

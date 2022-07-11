@@ -13,6 +13,7 @@
     $(document).ready(function () {
 
         $('#divNotes').load('./verNotas.php?lista=' + idList);
+        $('#divTasks').load('./verTareas.php?lista=' + idList);
 
         // Abre modal al dar click en boton
         $('#btnEditSubtask').click(function () {
@@ -33,6 +34,7 @@
             $('#editModalObjective').modal('hide');
         });
 
+        // Crear Nota
         // Al dar click en btnSubmitNote
         $('#btnSubmitNote').click(function () {
             // Eliminar espacios en blanco de los campos
@@ -85,6 +87,61 @@
             }
         });
 
+        // Crear Tarea
+        // Al dar click en btnSubmitTask
+        $('#btnSubmitTask').click(function () {
+            // Eliminar espacios en blanco de los campos
+            inputTaskTitle.value = inputTaskTitle.value.trim();
+            inputTaskDescription.value = inputTaskDescription.value.trim();
+
+            // Validar el titulo de la tarea
+            if (inputTaskTitle.value.length < 1) {
+                inputTaskTitle.classList.add('is-invalid');
+                inputTaskTitle.classList.remove('is-valid');
+            } else {
+                inputTaskTitle.classList.add('is-valid');
+                inputTaskTitle.classList.remove('is-invalid');
+            } 
+            // Validar la descripcion de la tarea
+            if (inputTaskDescription.value.length < 1) {
+                inputTaskDescription.classList.add('is-invalid');
+                inputTaskDescription.classList.remove('is-valid');
+            }
+            else {
+                inputTaskDescription.classList.add('is-valid');
+                inputTaskDescription.classList.remove('is-invalid');
+            }
+
+            // Enviar formulario si todos los campos son validos
+            if (inputTaskTitle.classList.contains('is-valid') && inputTaskDescription.classList.contains('is-valid')) {
+                // Remover las clases de validacion
+                inputTaskTitle.classList.remove('is-valid');
+                inputTaskTitle.classList.remove('is-invalid');
+                inputTaskDescription.classList.remove('is-valid');
+                inputTaskDescription.classList.remove('is-invalid');
+
+                // Redireccionar a crearTarea.php con ajax
+                $.ajax({
+                    url: './crearTarea.php',
+                    type: 'POST',
+                    data: {
+                        idList: idList,
+                        inputTaskTitle: inputTaskTitle.value,
+                        inputTaskDescription: inputTaskDescription.value
+                    },
+                    // Mostrar las tareas del usuario
+                    success: function (response) {
+                        $('#divTasks').load('./verTareas.php?lista=' + idList);
+                        // Limpiar campos
+                        inputTaskTitle.value = '';
+                        inputTaskDescription.value = '';
+                    }
+                });
+            }
+        });
+
+
+        // Editar objetivo
         // Validar el formulario al dar click en boton btnSubmitEditObjective
         $('#btnSubmitEditObjective').click(function () {
             // Eliminar espacios en blanco de los campos
@@ -143,6 +200,7 @@
     }
     );
 
+    // Eliminar nota al dar click en boton
     $(document).on('click', '#btnDeleteNote', function () {
         var idNota = $(this).attr('name');
 
@@ -163,4 +221,5 @@
         });
     }
     );
+
 })();

@@ -83,6 +83,7 @@
 
         // Abrir modal al dar click en boton
         $('#deleteListModal').modal('show');
+        
         // Si da click en el boton btnSubmitDeleteList
         $('#btnSubmitDeleteList').click(function () {
             // Redireccionar a eliminarLista con ajax

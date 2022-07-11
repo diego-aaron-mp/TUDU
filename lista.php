@@ -190,15 +190,15 @@ $tareas = $query->fetchAll();
             <!-- Input para agregar nueva tarea -->
             <h5 class="card-title">Agregar nueva tarea</h5>
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="Agregar tarea" aria-label="Agregar subtarea" aria-describedby="basic-addon2">
+              <input type="text" id="inputTaskTitle" class="form-control" placeholder="Agregar tarea" aria-label="Agregar subtarea" aria-describedby="basic-addon2">
             </div>
             <div class="input-group mt-3">
               <!-- Text area para escribir la descipcion de la nueva tarea -->
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="1" placeholder="Descripción de la tarea"></textarea>
+              <textarea class="form-control" id="inputTaskDescription" rows="1" placeholder="Descripción de la tarea"></textarea>
             </div>
             <div class="input-group mt-3">
               <!-- Boton para agregar la nueva tarea -->
-              <button type="button" class="btn btn-primary">
+              <button id="btnSubmitTask" type="button" class="btn btn-primary">
                 <i class="bi bi-plus-lg"></i>
                 Agregar
               </button>
@@ -236,59 +236,8 @@ $tareas = $query->fetchAll();
 
   <!-- Tareas y subtareas -->
   <div class="container mt-3 mb-3">
-    <div class="row g-3">
-      <!-- Aqui inicia una card -->
-      <div class="col-12 col-md-12 col-lg-12">
-        <div class="card">
-          <!-- Titulo de la card -->
-          <div class="modal-header">
-            <h5 class="card-title"><input type="checkbox" class="form-check-input" id="customCheck1">&nbsp;Tarea</h5>
-            <!-- Boton de eliminar  -->
-            <button type="button" class="btn btn-close">
-            </button>
-          </div>
-          <div class="card-body">
-            <p class="card-text mt-1">Descripcion de la tarea</p>
-            <h6 class="card-text">Subtareas
-              <!-- Boton para agregar subtareas -->
-              <button type="button" id="btnAddSubtask" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
-                <i class="bi bi-plus"></i>
-              </button>
-            </h6>
+    <div class="row g-3" id="divTasks">
 
-
-            <!-- Checklist -->
-            <div class="list-group mb-3">
-              <!-- Aqui inicia una subtarea -->
-              <label class="list-group-item">
-                <div class="row">
-                  <div class="col-10">
-                    <input class="form-check-input me-1" type="checkbox" value="">
-                    Subtarea un poco mas grande para calar esta cosa
-                  </div>
-                  <div class="col-2">
-                    <span class="btn-group-sm">
-                      <!-- Boton de editar -->
-                      <button id="btnEditSubtask" type="button" class="btn btn-secondary">
-                        <i class="bi bi-pencil"></i>
-                      </button>
-                      <!-- Boton de eliminar  -->
-                      <button type="button" class="btn btn-danger">
-                        <i class="bi bi-trash"></i>
-                      </button>
-                    </span>
-                  </div>
-                </div>
-              </label>
-              <!-- Aqui termina una subtarea -->
-            </div>
-            <!-- Fin de checklist -->
-
-            <!-- Boton para editar -->
-            <button id="btnEditTask" class="btn btn-primary mt-2">Editar</button>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -395,8 +344,11 @@ $tareas = $query->fetchAll();
   <div class="modal fade" id="editModalObjective" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+        <div class="modal-header bg-secondary">
+          <h5 class="modal-title text-white" id="exampleModalLabel">
+          <i class="bi bi-pencil-fill"></i>
+            Editar
+          </h5>
           <button type="button" id="btnCloseModalObjective" class="close btn-close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true"></span>
           </button>
