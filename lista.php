@@ -263,14 +263,14 @@ $tareas = $query->fetchAll();
         <div class="modal-body">
           <!-- Input para editar el titulo de la tarea -->
           <div class="form-group">
-            <label for="inputTitleTask">Titulo de la tarea</label>
-            <input type="text" class="form-control" id="inputTitleTask" aria-describedby="inputTitleTask" placeholder="Ej. Tarea de estudio">
+            <label for="inputEditTitleTask">Titulo de la tarea</label>
+            <input type="text" class="form-control" id="inputEditTitleTask" aria-describedby="inputEditTitleTask" placeholder="Ej. Tarea de estudio">
           </div>
 
           <!-- Text area para editar la descripcion de la tarea -->
           <div class="form-group">
-            <label for="inputDescriptionTask">Descripcion de la tarea</label>
-            <textarea class="form-control" id="inputDescriptionTask" rows="3" placeholder="Ej. Estudiar para el examen de final de semestre"></textarea>
+            <label for="inputEditTaskDescription">Descripcion de la tarea</label>
+            <textarea class="form-control" id="inputEditTaskDescription" rows="3" placeholder="Ej. Estudiar para el examen de final de semestre"></textarea>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -411,6 +411,7 @@ $tareas = $query->fetchAll();
   <script src="./assets/scripts/editSubtask.js"></script>
   <script src="./assets/scripts/editObjective.js"></script>
 
+  
   <script src="./assets/scripts/pruebas.js"></script>
 </body>
 

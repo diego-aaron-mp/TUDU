@@ -15,12 +15,6 @@
         $('#divNotes').load('./verNotas.php?lista=' + idList);
         $('#divTasks').load('./verTareas.php?lista=' + idList);
 
-        // Abre modal al dar click en boton
-        $('#btnEditSubtask').click(function () {
-            $('#editSubtaskModal').modal('show');
-        }
-        );
-
         // Abre modal de editar objtivo al dar click en boton
         $('#btnEditObjective').click(function () {
             $('#editModalObjective').modal('show');
@@ -200,6 +194,27 @@
     }
     );
 
+    // Editar tarea
+    $(document).on('click', '#btnEditTask', function () {
+        // Obtener los valores de los campos ocultos
+        var idTask = getElementById('idTask').value;
+
+        console.log(idTask);
+        // console.log(title);
+        // console.log(description);
+
+    
+        // Abrir modal de editar tarea
+        $('#editTaskModal').modal('show');
+
+
+        // Mostrar los datos en los inputs
+        // editTaskTitle = $('#editTaskTitle');
+        // editTaskDescription = $('#editTaskDescription');
+
+    });
+
+
     // Eliminar nota al dar click en boton
     $(document).on('click', '#btnDeleteNote', function () {
         var idNota = $(this).attr('name');
@@ -208,14 +223,14 @@
         idNota = idNota.substring(5);
 
         $.ajax({
-            url: './eliminarNota.php',
+            url: './eliminarNota.php?idNota=' + idNota,
             type: 'GET',
             data: {
                 idNota: idNota
             },
             // Mostrar las notas del usuario
             success: function (response) {
-                // $('#divNotes').load('./verNotas.php?lista=' + idList);
+                $('#divNotes').load('./verNotas.php?lista=' + idList);
                 idNota = '';
             }
         });

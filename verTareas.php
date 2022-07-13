@@ -24,13 +24,20 @@ foreach ($tareas as $key => $value) : ?>
         <div class="card">
             <!-- Titulo de la card -->
             <div class="modal-header">
-                <h5 class="card-title"><input type="checkbox" class="form-check-input" id="customCheck1">&nbsp;<?php echo $value['tituloTarea']; ?></h5>
+                <h5 class="card-title" id="taskTitle"><input type="checkbox" class="form-check-input" id="customCheck1">&nbsp;<?php echo $value['tituloTarea']; ?></h5>
                 <!-- Boton de eliminar  -->
                 <button type="button" class="btn btn-close">
                 </button>
             </div>
             <div class="card-body">
-                <p class="card-text mt-1"><?php echo $value['descripciontarea']; ?></p>
+
+                <p class="card-text mt-1" id="taskDescription"><?php echo $value['descripciontarea']; ?></p>
+
+                <!-- Guardar el id de la tarea, su titulo y su descripcion en un array -->
+                <input type="hidden" name="idTarea" id="idTask" value="<?php echo $value['idTarea']; ?>">
+                <input type="hidden" name="tituloTarea" id="tituloTarea" value="<?php echo $value['tituloTarea']; ?>">
+                <input type="hidden" name="descripcionTarea" id="descripcionTarea" value="<?php echo $value['descripcionTarea']; ?>">
+                
                 <h6 class="card-text">Subtareas
                     <!-- Boton para agregar subtareas -->
                     <button type="button" id="btnAddSubtask" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">

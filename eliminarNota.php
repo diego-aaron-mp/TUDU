@@ -22,7 +22,7 @@
     // $lista = $query->fetchAll(PDO::FETCH_ASSOC);
 
     // Eliminar la Nota de la base de datos
-//     $sql = "DELETE FROM nota WHERE idNota = '" . $idNota . "'";
-//     $query = $conexion->prepare($sql);
-//     $query->execute();
+    $sql = "DELETE FROM nota WHERE idNota = '" . $idNota . "'";
+    $query = $conexion->prepare($sql);
+    $query->execute();
 // ?>
