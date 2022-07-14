@@ -255,7 +255,7 @@ $tareas = $query->fetchAll();
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
-          <button type="button" class="close btn-close" data-dismiss="modal" aria-label="Close">
+          <button type="button" id="btnCloseEditTaskModal" class="close btn-close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true"></span>
           </button>
         </div>
@@ -273,8 +273,7 @@ $tareas = $query->fetchAll();
             <textarea class="form-control" id="inputEditTaskDescription" rows="3" placeholder="Ej. Estudiar para el examen de final de semestre"></textarea>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary">Guardar</button>
+            <button type="button" id="btnSubmitEditTask" class="btn btn-primary">Guardar</button>
           </div>
         </div>
       </div>

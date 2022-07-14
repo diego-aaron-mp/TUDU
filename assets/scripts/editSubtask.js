@@ -5,6 +5,7 @@
         inputNoteDescription = document.getElementById('inputNoteDescription'),
         inputTitle = document.getElementById('inputTitle'),
         inputObjective = document.getElementById('inputObjective');
+    var idTask = '';
 
     // Obtener el id de la lista a travers de la url
     var url = new URL(window.location.href);
@@ -27,6 +28,7 @@
         $('#btnCloseModalObjective').click(function () {
             $('#editModalObjective').modal('hide');
         });
+
 
         // Crear Nota
         // Al dar click en btnSubmitNote
@@ -95,7 +97,7 @@
             } else {
                 inputTaskTitle.classList.add('is-valid');
                 inputTaskTitle.classList.remove('is-invalid');
-            } 
+            }
             // Validar la descripcion de la tarea
             if (inputTaskDescription.value.length < 1) {
                 inputTaskDescription.classList.add('is-invalid');
@@ -191,13 +193,15 @@
 
         });
 
+
     }
     );
 
     // Editar tarea
+    // Al dar click en boton btnEditTask
     $(document).on('click', '#btnEditTask', function () {
         // Obtener los valores de los campos ocultos
-        var idTask = $(this).attr('name');
+        idTask = $(this).attr('name');
         
         // Recortar "tarea?" de la cadena
         idTask = idTask.substring(6);
@@ -220,17 +224,83 @@
                 $('#editTaskModal').modal('show');
             }
         });
-        
-        // Abrir modal de editar tarea
-        // $('#editTaskModal').modal('show');
+        // Al dar click en boton btnSubmitEditTask
+        $('#btnSubmitEditTask').click(function () {
+            // Eliminar espacios en blanco de los campos
+            inputEditTitleTask.value = inputEditTitleTask.value.trim();
+            inputEditTaskDescription.value = inputEditTaskDescription.value.trim();
 
+            // Validar el titulo de la tarea
+            if (inputEditTitleTask.value.length < 1) {
+                inputEditTitleTask.classList.add('is-invalid');
+                inputEditTitleTask.classList.remove('is-valid');
+            } else {
+                inputEditTitleTask.classList.add('is-valid');
+                inputEditTitleTask.classList.remove('is-invalid');
+            }
+            // Validar la descripcion de la tarea
+            if (inputEditTaskDescription.value.length < 1) {
+                inputEditTaskDescription.classList.add('is-invalid');
+                inputEditTaskDescription.classList.remove('is-valid');
+            }
+            else {
+                inputEditTaskDescription.classList.add('is-valid');
+                inputEditTaskDescription.classList.remove('is-invalid');
+            }
 
-        // Mostrar los datos en los inputs
-        // editTaskTitle = $('#editTaskTitle');
-        // editTaskDescription = $('#editTaskDescription');
+            // Enviar formulario si todos los campos son validos
+            if (inputEditTitleTask.classList.contains('is-valid') && inputEditTaskDescription.classList.contains('is-valid')) {
+                // Remover las clases de validacion
+                inputEditTitleTask.classList.remove('is-valid');
+                inputEditTitleTask.classList.remove('is-invalid');
+                inputEditTaskDescription.classList.remove('is-valid');
+                inputEditTaskDescription.classList.remove('is-invalid');
 
+                // Redireccionar a editarTarea.php con ajax
+                $.ajax({
+                    url: './editarTarea.php',
+                    type: 'POST',
+                    data: {
+                        idTask: idTask,
+                        inputEditTitleTask: inputEditTitleTask.value,
+                        inputEditTaskDescription: inputEditTaskDescription.value
+                    },
+                    // Mostrar las tareas del usuario
+                    success: function (response) {
+                        $('#divTasks').load('./verTareas.php?lista=' + idList);
+                        // Limpiar campos
+                        inputEditTitleTask.value = '';
+                        inputEditTaskDescription.value = '';
+                        idTask = '';
+
+                        // Cerrar el modal
+                        $('#editTaskModal').modal('hide', function () {
+                            // Quitar clases de validacion
+                            inputTaskTitle.classList.remove('is-valid');
+                            inputTaskTitle.classList.remove('is-invalid');
+                            inputTaskDescription.classList.remove('is-valid');
+                            inputTaskDescription.classList.remove('is-invalid');
+                            idTask = '';
+                        });
+                    }
+
+                });
+            }
+        });
     });
 
+    // Cerrar modal al dar click en btnCloseEditTaskModal
+    $(document).on('click', '#btnCloseEditTaskModal', function () {
+        // Cerrar el modal
+        $('#editTaskModal').modal('hide', function () {
+            // Quitar clases de validacion
+            inputTaskTitle.classList.remove('is-valid');
+            inputTaskTitle.classList.remove('is-invalid');
+            inputTaskDescription.classList.remove('is-valid');
+            inputTaskDescription.classList.remove('is-invalid');
+            idTask = '';
+        });
+    });
 
     // Eliminar nota al dar click en boton
     $(document).on('click', '#btnDeleteNote', function () {
