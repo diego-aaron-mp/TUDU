@@ -83,7 +83,7 @@
 
         // Abrir modal al dar click en boton
         $('#deleteListModal').modal('show');
-        
+
         // Si da click en el boton btnSubmitDeleteList
         $('#btnSubmitDeleteList').click(function () {
             // Redireccionar a eliminarLista con ajax
@@ -105,6 +105,13 @@
         // Limpiar el id al cerrar el modal
         $('#deleteListModal').on('hidden.bs.modal', function () {
             idLista = '';
+        });
+
+        // Cerrar el modal al dar click en boton btnCloseDeleteList
+        $('#btnCloseDeleteList').click(function () {
+            $('#deleteListModal').modal('hide', function () {
+                idLista = '';
+            });
         });
     });
 

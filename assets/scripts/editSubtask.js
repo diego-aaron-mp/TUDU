@@ -202,7 +202,7 @@
     $(document).on('click', '#btnEditTask', function () {
         // Obtener los valores de los campos ocultos
         idTask = $(this).attr('name');
-        
+
         // Recortar "tarea?" de la cadena
         idTask = idTask.substring(6);
 
@@ -287,19 +287,19 @@
                 });
             }
         });
-    });
 
-    // Cerrar modal al dar click en btnCloseEditTaskModal
-    $(document).on('click', '#btnCloseEditTaskModal', function () {
-        // Cerrar el modal
-        $('#editTaskModal').modal('hide', function () {
-            // Quitar clases de validacion
-            inputTaskTitle.classList.remove('is-valid');
-            inputTaskTitle.classList.remove('is-invalid');
-            inputTaskDescription.classList.remove('is-valid');
-            inputTaskDescription.classList.remove('is-invalid');
-            idTask = '';
+        $('#btnCloseEditTaskModal').click(function () {
+            // Cerrar el modal
+            $('#editTaskModal').modal('hide', function () {
+                // Quitar clases de validacion
+                inputTaskTitle.classList.remove('is-valid');
+                inputTaskTitle.classList.remove('is-invalid');
+                inputTaskDescription.classList.remove('is-valid');
+                inputTaskDescription.classList.remove('is-invalid');
+                idTask = '';
+            });
         });
+
     });
 
     // Eliminar nota al dar click en boton
