@@ -32,11 +32,6 @@ foreach ($tareas as $key => $value) : ?>
             <div class="card-body">
 
                 <p class="card-text mt-1" id="taskDescription"><?php echo $value['descripciontarea']; ?></p>
-
-                <!-- Guardar el id de la tarea, su titulo y su descripcion en un array -->
-                <input type="hidden" name="idTarea" id="idTask" value="<?php echo $value['idTarea']; ?>">
-                <input type="hidden" name="tituloTarea" id="tituloTarea" value="<?php echo $value['tituloTarea']; ?>">
-                <input type="hidden" name="descripcionTarea" id="descripcionTarea" value="<?php echo $value['descripcionTarea']; ?>">
                 
                 <h6 class="card-text">Subtareas
                     <!-- Boton para agregar subtareas -->
@@ -74,9 +69,11 @@ foreach ($tareas as $key => $value) : ?>
                 <!-- Fin de checklist -->
 
                 <!-- Boton para editar -->
-                <button id="btnEditTask" class="btn btn-primary mt-2">Editar</button>
+                <button id="btnEditTask" name="tarea?<?php echo $value['idTarea']; ?>" class="btn btn-primary mt-2">Editar</button>
             </div>
         </div>
     </div>
+
+    
 
 <?php endforeach; ?>

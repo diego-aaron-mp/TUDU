@@ -197,15 +197,32 @@
     // Editar tarea
     $(document).on('click', '#btnEditTask', function () {
         // Obtener los valores de los campos ocultos
-        var idTask = getElementById('idTask').value;
+        var idTask = $(this).attr('name');
+        
+        // Recortar "tarea?" de la cadena
+        idTask = idTask.substring(6);
 
-        console.log(idTask);
-        // console.log(title);
-        // console.log(description);
+        // Consulta sql para obtener los datos de la tarea
+        $.ajax({
+            url: './obtenerTarea.php',
+            type: 'POST',
+            data: {
+                idTask: idTask
+            },
+            success: function (response) {
+                // Obtener los datos de la tarea
+                var task = JSON.parse(response);
 
-    
+                // Mostrar los datos en los campos del formulario
+                $('#inputEditTitleTask').val(task.title.trim());
+                $('#inputEditTaskDescription').val(task.description.trim());
+                // Mostrar el modal
+                $('#editTaskModal').modal('show');
+            }
+        });
+        
         // Abrir modal de editar tarea
-        $('#editTaskModal').modal('show');
+        // $('#editTaskModal').modal('show');
 
 
         // Mostrar los datos en los inputs
