@@ -302,6 +302,113 @@
 
     });
 
+    // Editar nota
+    // Al dar click en boton btnEditNote
+    $(document).on('click', '#btnEditNote', function () {
+        // Obtener los valores de los campos ocultos
+        idNote = $(this).attr('name');
+
+        // Recortar "nota?" de la cadena
+        idNote = idNote.substring(5);
+
+        // Consulta sql para obtener los datos de la nota
+        $.ajax({
+            url: './obtenerNota.php',
+            type: 'POST',
+            data: {
+                idNote: idNote
+            },
+            success: function (response) {
+                // Obtener los datos de la nota
+                var note = JSON.parse(response);
+
+                // Mostrar los datos en los campos del formulario
+                $('#inputEditTitleNote').val(note.title.trim());
+                $('#inputEditDescriptionNote').val(note.description.trim());
+                // Mostrar el modal
+                $('#editModalNote').modal('show');
+            }
+        });
+        // Al dar click en boton btnSubmitEditNote
+        $('#btnSubmitEditNote').click(function () {
+            // Eliminar espacios en blanco de los campos
+            inputEditTitleNote.value = inputEditTitleNote.value.trim();
+            inputEditDescriptionNote.value = inputEditDescriptionNote.value.trim();
+
+            // Validar el titulo de la nota
+            if (inputEditTitleNote.value.length < 1) {
+                inputEditTitleNote.classList.add('is-invalid');
+                inputEditTitleNote.classList.remove('is-valid');
+            } else {
+                inputEditTitleNote.classList.add('is-valid');
+                inputEditTitleNote.classList.remove('is-invalid');
+            }
+            // Validar la descripcion de la nota
+            if (inputEditDescriptionNote.value.length < 1) {
+                inputEditDescriptionNote.classList.add('is-invalid');
+                inputEditDescriptionNote.classList.remove('is-valid');
+            }
+            else {
+                inputEditDescriptionNote.classList.add('is-valid');
+                inputEditDescriptionNote.classList.remove('is-invalid');
+            }
+
+            // Enviar formulario si todos los campos son validos
+            if (inputEditTitleNote.classList.contains('is-valid') && inputEditDescriptionNote.classList.contains('is-valid')) {
+                // Remover las clases de validacion
+                inputEditTitleNote.classList.remove('is-valid');
+                inputEditTitleNote.classList.remove('is-invalid');
+                inputEditDescriptionNote.classList.remove('is-valid');
+                inputEditDescriptionNote.classList.remove('is-invalid');
+
+                // Redireccionar a editarNota.php con ajax
+                $.ajax({
+                    url: './editarNota.php',
+                    type: 'POST',
+                    data: {
+                        idNote: idNote,
+                        inputEditTitleNote: inputEditTitleNote.value,
+                        inputEditDescriptionNote: inputEditDescriptionNote.value
+                    },
+                    // Mostrar las notas del usuario
+                    success: function (response) {
+                        $('#divNotes').load('./verNotas.php?lista=' + idList);
+                        // Limpiar campos
+                        inputEditTitleNote.value = '';
+                        inputEditDescriptionNote.value = '';
+                        idNote = '';
+
+                        // Cerrar el modal
+                        $('#editModalNote').modal('hide', function () {
+                            // Quitar clases de validacion
+                            inputEditTitleNote.classList.remove('is-valid');
+                            inputEditTitleNote.classList.remove('is-invalid');
+                            inputEditDescriptionNote.classList.remove('is-valid');
+                            inputEditDescriptionNote.classList.remove('is-invalid');
+                            idNote = '';
+                        });
+                    }
+
+                });
+            }
+        });
+
+        $('#btnCloseEditNoteModal').click(function () {
+            // Cerrar el modal
+            $('#editModalNote').modal('hide', function () {
+                // Quitar clases de validacion
+                inputEditTitleNote.classList.remove('is-valid');
+                inputEditTitleNote.classList.remove('is-invalid');
+                inputEditDescriptionNote.classList.remove('is-valid');
+                inputEditDescriptionNote.classList.remove('is-invalid');
+                idNote = '';
+            });
+        });
+
+    });
+
+
+
     // Eliminar nota al dar click en boton
     $(document).on('click', '#btnDeleteNote', function () {
         var idNota = $(this).attr('name');

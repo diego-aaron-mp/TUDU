@@ -325,17 +325,16 @@ $tareas = $query->fetchAll();
 
           <div class="form-group">
             <label for="inputTitleNote">Titulo de la nota</label>
-            <input type="text" class="form-control" id="inputTitleNote" aria-describedby="inputTitleNote" placeholder="Ej. Nota de estudio">
+            <input type="text" class="form-control" id="inputEditTitleNote" aria-describedby="inputTitleNote" placeholder="Ej. Nota de estudio">
           </div>
 
           <!-- Input para editar la descripcion de la nota -->
           <div class="form-group">
             <label for="inputDescriptionNote">Descripcion de la nota</label>
-            <textarea class="form-control" id="inputDescriptionNote" rows="3" placeholder="Ej. Estudio de inglés"></textarea>
+            <textarea class="form-control" id="inputEditDescriptionNote" rows="3" placeholder="Ej. Estudio de inglés"></textarea>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary">Guardar</button>
+            <button type="button" id="btnSubmitEditNote" class="btn btn-primary">Guardar</button>
           </div>
         </div>
       </div>

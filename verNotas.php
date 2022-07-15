@@ -31,7 +31,7 @@ foreach ($notas as $key => $value) : ?>
             <div class="card-body">
                 <p class="card-text"><?php echo $value['descripcionNota']; ?></p>
                 <!-- Boton para editar -->
-                <button id="btnEditNote" type="button" class="btn btn-primary mt-2">Editar</button>
+                <button id="btnEditNote" name="nota?<?php echo $value['idNota']; ?>" type="button" class="btn btn-primary mt-2">Editar</button>
             </div>
         </div>
     </div>
