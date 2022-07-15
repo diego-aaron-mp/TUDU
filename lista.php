@@ -314,9 +314,12 @@ $tareas = $query->fetchAll();
   <div class="modal fade" id="editModalNote" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
-          <button type="button" class="close btn-close" data-dismiss="modal" aria-label="Close">
+        <div class="modal-header bg-secondary">
+          <h5 class="modal-title text-white" id="exampleModalLabel">
+          <i class="bi bi-pencil-fill"></i>
+            Editar nota
+          </h5>
+          <button type="button" id="btnCloseEditNoteModal" class="close btn-close" data-dismiss="modal" aria-label="Close">
 
           </button>
         </div>
