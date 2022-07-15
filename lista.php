@@ -253,8 +253,11 @@ $tareas = $query->fetchAll();
   <div class="modal fade" id="editTaskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+        <div class="modal-header bg-secondary">
+          <h5 class="modal-title text-white" id="exampleModalLabel">
+          <i class="bi bi-pencil-fill"></i>
+          Editar tarea
+        </h5>
           <button type="button" id="btnCloseEditTaskModal" class="close btn-close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true"></span>
           </button>
@@ -346,7 +349,7 @@ $tareas = $query->fetchAll();
         <div class="modal-header bg-secondary">
           <h5 class="modal-title text-white" id="exampleModalLabel">
           <i class="bi bi-pencil-fill"></i>
-            Editar
+            Editar objetivo
           </h5>
           <button type="button" id="btnCloseModalObjective" class="close btn-close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true"></span>
