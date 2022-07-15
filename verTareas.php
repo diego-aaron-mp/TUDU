@@ -26,7 +26,7 @@ foreach ($tareas as $key => $value) : ?>
             <div class="modal-header">
                 <h5 class="card-title" id="taskTitle"><input type="checkbox" class="form-check-input" id="customCheck1">&nbsp;<?php echo $value['tituloTarea']; ?></h5>
                 <!-- Boton de eliminar  -->
-                <button type="button" class="btn btn-close">
+                <button type="button" id="btnDeleteTask" name="tarea?<?php echo $value['idTarea']; ?>" class="btn btn-close">
                 </button>
             </div>
             <div class="card-body">

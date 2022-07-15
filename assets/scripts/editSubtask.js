@@ -407,8 +407,6 @@
 
     });
 
-
-
     // Eliminar nota al dar click en boton
     $(document).on('click', '#btnDeleteNote', function () {
         var idNota = $(this).attr('name');
@@ -430,5 +428,28 @@
         });
     }
     );
+
+    // Eliminar tarea al dar click en boton
+    $(document).on('click', '#btnDeleteTask', function () {
+        var idTarea = $(this).attr('name');
+
+        // Recortar la cadena "tarea?"
+        idTarea = idTarea.substring(6);
+
+        $.ajax({
+            url: './eliminarTarea.php?idTarea=' + idTarea,
+            type: 'GET',
+            data: {
+                idTarea: idTarea
+            },
+            // Mostrar las tareas del usuario
+            success: function (response) {
+                $('#divTasks').load('./verTareas.php?lista=' + idList);
+                idTarea = '';
+            }
+        });
+
+
+    });
 
 })();
