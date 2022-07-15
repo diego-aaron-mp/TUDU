@@ -2,7 +2,7 @@
 (function () {
     // Variables
     var listName = document.getElementById('inputListName'),
-        listObjective = document.getElementById('inputObjective');
+        listGoal = document.getElementById('inputGoal');
 
     $(document).ready(function () {
         // Mostrar verListas.php en #divLists
@@ -22,7 +22,7 @@
         $('#btnSubmitCreateList').click(function () {
             // Eliminar espacios en blanco de los campos
             listName.value = listName.value.trim();
-            listObjective.value = listObjective.value.trim();
+            listGoal.value = listGoal.value.trim();
 
             // Validar el nombre de la lista
             if (listName.value.length < 1) {
@@ -34,23 +34,23 @@
             }
 
             // Validar el objetivo de la lista
-            if (listObjective.value.length < 1) {
-                listObjective.classList.add('is-invalid');
-                listObjective.classList.remove('is-valid');
+            if (listGoal.value.length < 1) {
+                listGoal.classList.add('is-invalid');
+                listGoal.classList.remove('is-valid');
             } else {
-                listObjective.classList.add('is-valid');
-                listObjective.classList.remove('is-invalid');
+                listGoal.classList.add('is-valid');
+                listGoal.classList.remove('is-invalid');
             }
 
             // Enviar formulario si todos los campos son validos
-            if (listName.classList.contains('is-valid') && listObjective.classList.contains('is-valid')) {
+            if (listName.classList.contains('is-valid') && listGoal.classList.contains('is-valid')) {
                 // Redireccionar a crearLista.php con ajax
                 $.ajax({
                     url: './crearLista.php',
                     type: 'POST',
                     data: {
                         listName: listName.value,
-                        listObjective: listObjective.value
+                        listGoal: listGoal.value
                     },
                     // Mostrar las listas del usuario
                     success: function (response) {
@@ -58,13 +58,13 @@
                         $('#divLists').load('./verListas.php');
                         // Limpiar campos
                         listName.value = '';
-                        listObjective.value = '';
+                        listGoal.value = '';
 
                         // Quitar clases de validacion
                         listName.classList.remove('is-valid');
                         listName.classList.remove('is-invalid');
-                        listObjective.classList.remove('is-valid');
-                        listObjective.classList.remove('is-invalid');
+                        listGoal.classList.remove('is-valid');
+                        listGoal.classList.remove('is-invalid');
                     }
 
                 });

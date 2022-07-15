@@ -17,7 +17,7 @@ $id = $_SESSION['idUsuario'];
 // Obtener el nombre de la lista a crear
 $idLista = $_POST['idList'];
 $nombreLista = $_POST['inputTitle'];
-$objetivoLista = $_POST['inputObjective'];
+$objetivoLista = $_POST['inputGoal'];
 
 // Editar el objetivo y el titulo de la lista
 $sql = "UPDATE lista SET nombreLista = '$nombreLista', objetivoLista = '$objetivoLista' WHERE idLista = '$idLista'";

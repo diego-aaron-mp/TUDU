@@ -132,11 +132,11 @@ $tareas = $query->fetchAll();
 
       <h2 class="display-5 fw-bold"><i class="bi bi-trophy-fill"> </i>Objetivo
         <!-- Boton para editar el objetivo -->
-        <button id="btnEditObjective" class="btn btn-secondary btn-lg btn-block" type="button" data-toggle="modal" data-target="#exampleModal">
+        <button id="btnEditGoal" class="btn btn-secondary btn-lg btn-block" type="button" data-toggle="modal" data-target="#exampleModal">
           <i class="bi bi-pencil"></i>
         </button>
       </h2>
-      <p class="col-md-12 fs-4" id="listObjective">
+      <p class="col-md-12 fs-4" id="listGoal">
         <!-- Imprimir objetivoLista de la variable objetivo con php  -->
         <?php foreach ($objetivo as $key => $value) : ?>
           <?php echo $value['objetivoLista']; ?>
@@ -343,7 +343,7 @@ $tareas = $query->fetchAll();
   </div>
 
   <!-- Modal para editar el titulo y el objetivo -->
-  <div class="modal fade" id="editModalObjective" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="editModalGoal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header bg-secondary">
@@ -351,7 +351,7 @@ $tareas = $query->fetchAll();
           <i class="bi bi-pencil-fill"></i>
             Editar objetivo
           </h5>
-          <button type="button" id="btnCloseModalObjective" class="close btn-close" data-dismiss="modal" aria-label="Close">
+          <button type="button" id="btnCloseModalGoal" class="close btn-close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true"></span>
           </button>
         </div>
@@ -363,11 +363,11 @@ $tareas = $query->fetchAll();
             <label for="inputTitle">Titulo de la lista</label>
             <input type="text" class="form-control" id="inputTitle" aria-describedby="inputTitle" placeholder="Ej. Objetivo de estudio">
             <!-- Input del Objetivo -->
-            <label for="inputObjective">Descripcion del objetivo</label>
-            <textarea class="form-control" id="inputObjective" rows="3" placeholder="Ej. Estudiar para el examen de final de semestre"></textarea>
+            <label for="inputGoal">Descripcion del objetivo</label>
+            <textarea class="form-control" id="inputGoal" rows="3" placeholder="Ej. Estudiar para el examen de final de semestre"></textarea>
           </div>
           <div class="modal-footer">
-            <button id="btnSubmitEditObjective" type="submit" class="btn btn-primary">Guardar</button>
+            <button id="btnSubmitEditGoal" type="submit" class="btn btn-primary">Guardar</button>
           </div>
         </div>
         <!-- </form> -->
@@ -411,7 +411,7 @@ $tareas = $query->fetchAll();
 
   <script src="./assets/scripts/editTask.js"></script>
   <script src="./assets/scripts/editSubtask.js"></script>
-  <script src="./assets/scripts/editObjective.js"></script>
+  <script src="./assets/scripts/editGoal.js"></script>
 
   
   <script src="./assets/scripts/pruebas.js"></script>

@@ -136,8 +136,8 @@ $id = $_SESSION['idUsuario'];
               <input type="text" class="form-control" id="inputListName" aria-describedby="inputListName" placeholder="Ej. Estudio de inglés">
             </div>
             <div class="form-group">
-              <label for="inputObjective">Objetivo de la lista</label>
-              <textarea class="form-control" id="inputObjective" rows="3" placeholder="Ej. Alcanzar un nivel que me permita entablar una conversación con un hablante nativo."></textarea>
+              <label for="inputGoal">Objetivo de la lista</label>
+              <textarea class="form-control" id="inputGoal" rows="3" placeholder="Ej. Alcanzar un nivel que me permita entablar una conversación con un hablante nativo."></textarea>
             </div>
           </form>
         </div>

@@ -16,7 +16,7 @@ $id = $_SESSION['idUsuario'];
 
 // Obtener el nombre de la lista a crear
 $nombreLista = $_POST['listName'];
-$objetivoLista = $_POST['listObjective'];
+$objetivoLista = $_POST['listGoal'];
 
 // Insertar la lista en la base de datos
 $sql = "INSERT INTO lista (nombreLista, objetivoLista, Usuario_idUsuario) VALUES ('" . $nombreLista . "', '" . $objetivoLista . "', '" . $id . "')";
