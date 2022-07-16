@@ -17,7 +17,6 @@ $query = $conexion->prepare($sql);
 $query->execute();
 $tareas = $query->fetchAll();
 
-
 foreach ($tareas as $key => $value) : ?>
     <!-- Aqui inicia una card -->
     <div class="col-12 col-md-12 col-lg-12">
@@ -32,7 +31,7 @@ foreach ($tareas as $key => $value) : ?>
             <div class="card-body">
 
                 <p class="card-text mt-1" id="taskDescription"><?php echo $value['descripciontarea']; ?></p>
-                
+
                 <h6 class="card-text">Subtareas
                     <!-- Boton para agregar subtareas -->
                     <button type="button" id="btnAddSubtask" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
@@ -41,30 +40,41 @@ foreach ($tareas as $key => $value) : ?>
                 </h6>
 
 
+
+                <!-- Obtener las subtareas de la tarea -->
+                <?php
+                $sql = "SELECT * FROM subtarea WHERE Tarea_idTarea =" . $value['idTarea'] . "";
+                $query = $conexion->prepare($sql);
+                $query->execute();
+                $subtareas = $query->fetchAll();
+                ?>
+
                 <!-- Checklist -->
                 <div class="list-group mb-3">
-                    <!-- Aqui inicia una subtarea -->
-                    <label class="list-group-item">
-                        <div class="row">
-                            <div class="col-10">
-                                <input class="form-check-input me-1" type="checkbox" value="">
-                                Subtarea un poco mas grande para calar esta cosa
+                    <?php foreach ($subtareas as $key => $value) : ?>
+                        <!-- Aqui inicia una subtarea -->
+                        <label class="list-group-item">
+                            <div class="row">
+                                <div class="col-10">
+                                    <input class="form-check-input me-1" type="checkbox" value="">
+                                    <?php echo $value['descripcionSubtarea']; ?>
+                                </div>
+                                <div class="col-2">
+                                    <span class="btn-group-sm">
+                                        <!-- Boton de editar -->
+                                        <button id="btnEditSubtask" type="button" class="btn btn-secondary">
+                                            <i class="bi bi-pencil"></i>
+                                        </button>
+                                        <!-- Boton de eliminar  -->
+                                        <button type="button" class="btn btn-danger">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </span>
+                                </div>
                             </div>
-                            <div class="col-2">
-                                <span class="btn-group-sm">
-                                    <!-- Boton de editar -->
-                                    <button id="btnEditSubtask" type="button" class="btn btn-secondary">
-                                        <i class="bi bi-pencil"></i>
-                                    </button>
-                                    <!-- Boton de eliminar  -->
-                                    <button type="button" class="btn btn-danger">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                </span>
-                            </div>
-                        </div>
-                    </label>
-                    <!-- Aqui termina una subtarea -->
+                        </label>
+                        <!-- Aqui termina una subtarea -->
+                    <?php endforeach; ?>
                 </div>
                 <!-- Fin de checklist -->
 
@@ -74,6 +84,6 @@ foreach ($tareas as $key => $value) : ?>
         </div>
     </div>
 
-    
+
 
 <?php endforeach; ?>
