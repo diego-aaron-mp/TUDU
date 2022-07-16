@@ -188,7 +188,10 @@ $tareas = $query->fetchAll();
         <div class="card">
           <div class="card-body">
             <!-- Input para agregar nueva tarea -->
-            <h5 class="card-title">Agregar nueva tarea</h5>
+            <h5 class="card-title">
+              <i class="bi bi-list-task"></i>
+              Agregar nueva tarea
+            </h5>
             <div class="input-group">
               <input type="text" id="inputTaskTitle" class="form-control" placeholder="Agregar tarea" aria-label="Agregar subtarea" aria-describedby="basic-addon2">
             </div>
@@ -212,7 +215,10 @@ $tareas = $query->fetchAll();
         <div class="card">
           <div class="card-body">
             <!-- Input para agregar nueva nota -->
-            <h5 class="card-title">Agregar nueva nota</h5>
+            <h5 class="card-title">
+              <i class="bi bi-journal-text"></i>
+              Agregar nueva nota
+            </h5>
             <div class="input-group">
               <input type="text" id="inputNoteTitle" class="form-control" placeholder="Agregar nota" aria-label="Agregar nota" aria-describedby="basic-addon2">
             </div>
@@ -244,7 +250,7 @@ $tareas = $query->fetchAll();
   <!-- Notas -->
   <div class="container mt-3 mb-3">
     <div class="row g-3" id="divNotes">
-     
+
     </div>
   </div>
 
@@ -255,9 +261,9 @@ $tareas = $query->fetchAll();
       <div class="modal-content">
         <div class="modal-header bg-secondary">
           <h5 class="modal-title text-white" id="exampleModalLabel">
-          <i class="bi bi-pencil-fill"></i>
-          Editar tarea
-        </h5>
+            <i class="bi bi-pencil-fill"></i>
+            Editar tarea
+          </h5>
           <button type="button" id="btnCloseEditTaskModal" class="close btn-close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true"></span>
           </button>
@@ -316,7 +322,7 @@ $tareas = $query->fetchAll();
       <div class="modal-content">
         <div class="modal-header bg-secondary">
           <h5 class="modal-title text-white" id="exampleModalLabel">
-          <i class="bi bi-pencil-fill"></i>
+            <i class="bi bi-pencil-fill"></i>
             Editar nota
           </h5>
           <button type="button" id="btnCloseEditNoteModal" class="close btn-close" data-dismiss="modal" aria-label="Close">
@@ -350,7 +356,7 @@ $tareas = $query->fetchAll();
       <div class="modal-content">
         <div class="modal-header bg-secondary">
           <h5 class="modal-title text-white" id="exampleModalLabel">
-          <i class="bi bi-pencil-fill"></i>
+            <i class="bi bi-pencil-fill"></i>
             Editar objetivo
           </h5>
           <button type="button" id="btnCloseModalGoal" class="close btn-close" data-dismiss="modal" aria-label="Close">
@@ -415,7 +421,7 @@ $tareas = $query->fetchAll();
   <script src="./assets/scripts/editSubtask.js"></script>
   <script src="./assets/scripts/editGoal.js"></script>
 
-  
+
   <script src="./assets/scripts/pruebas.js"></script>
 </body>
 

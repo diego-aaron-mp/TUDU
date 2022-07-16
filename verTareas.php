@@ -32,7 +32,9 @@ foreach ($tareas as $key => $value) : ?>
 
                 <p class="card-text mt-1" id="taskDescription"><?php echo $value['descripciontarea']; ?></p>
 
-                <h6 class="card-text">Subtareas
+                <h6 class="card-text">
+                <i class="bi bi-person-workspace"></i>
+                    Subtareas
                     <!-- Boton para agregar subtareas -->
                     <button type="button" id="btnAddSubtask" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
                         <i class="bi bi-plus"></i>
