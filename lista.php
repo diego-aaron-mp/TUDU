@@ -303,8 +303,8 @@ $tareas = $query->fetchAll();
         <div class="modal-body">
           <!-- Input para editar el titulo de la subtarea -->
           <div class="form-group">
-            <label for="inputTitleSubtask">Titulo de la subtarea</label>
-            <input type="text" class="form-control" id="inputTitleSubtask" aria-describedby="inputTitleSubtask" placeholder="Ej. Subtarea de estudio">
+            <label for="inputEditSubtask">Titulo de la subtarea</label>
+            <input type="text" class="form-control" id="inputEditSubtask" aria-describedby="inputEditSubtask" placeholder="Ej. Subtarea de estudio">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -397,12 +397,11 @@ $tareas = $query->fetchAll();
         <div class="modal-body">
           <!-- Input para agregar el titulo de la subtarea -->
           <div class="form-group">
-            <label for="inputTitleSubtask">Titulo de la subtarea</label>
-            <input type="text" class="form-control" id="inputTitleSubtask" aria-describedby="inputTitleSubtask" placeholder="Ej. Subtarea de estudio">
+            <label for="inputAddSubtask">Descripción de la subtarea</label>
+            <input type="text" class="form-control" id="inputAddSubtask" aria-describedby="inputAddSubtask" placeholder="Ej. Subtarea de estudio">
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary">Guardar</button>
+            <button type="button" id="btnSubmitAddSubtask" class="btn btn-primary">Guardar</button>
           </div>
         </div>
       </div>

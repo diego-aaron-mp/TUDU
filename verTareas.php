@@ -33,10 +33,10 @@ foreach ($tareas as $key => $value) : ?>
                 <p class="card-text mt-1" id="taskDescription"><?php echo $value['descripciontarea']; ?></p>
 
                 <h6 class="card-text">
-                <i class="bi bi-person-workspace"></i>
+                    <i class="bi bi-person-workspace"></i>
                     Subtareas
                     <!-- Boton para agregar subtareas -->
-                    <button type="button" id="btnAddSubtask" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
+                    <button type="button" id="btnAddSubtask" name="tarea?<?php echo $value['idTarea']; ?>" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
                         <i class="bi bi-plus"></i>
                     </button>
                 </h6>
@@ -53,22 +53,22 @@ foreach ($tareas as $key => $value) : ?>
 
                 <!-- Checklist -->
                 <div class="list-group mb-3">
-                    <?php foreach ($subtareas as $key => $value) : ?>
+                    <?php foreach ($subtareas as $keySubtask => $valueSubtask) : ?>
                         <!-- Aqui inicia una subtarea -->
                         <label class="list-group-item">
                             <div class="row">
                                 <div class="col-10">
                                     <input class="form-check-input me-1" type="checkbox" value="">
-                                    <?php echo $value['descripcionSubtarea']; ?>
+                                    <?php echo $valueSubtask['descripcionSubtarea']; ?>
                                 </div>
                                 <div class="col-2">
                                     <span class="btn-group-sm">
                                         <!-- Boton de editar -->
-                                        <button id="btnEditSubtask" type="button" class="btn btn-secondary">
+                                        <button id="btnEditSubtask" name="subtarea?<?php echo $valueSubtask['idSubtarea']; ?>" type="button" class="btn btn-secondary">
                                             <i class="bi bi-pencil"></i>
                                         </button>
                                         <!-- Boton de eliminar  -->
-                                        <button type="button" class="btn btn-danger">
+                                        <button id="btnDeleteSubtask" name="subtarea?<?php echo $valueSubtask['idSubtarea']; ?>" type="button" class="btn btn-danger">
                                             <i class="bi bi-trash"></i>
                                         </button>
                                     </span>

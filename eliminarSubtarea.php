@@ -12,15 +12,11 @@
     $id = $_SESSION['idUsuario'];
     
     // Obtener el id de la tarea a eliminar
-    $idTarea = $_GET['idTarea'];
+    $idSubtarea = $_GET['idSubtarea'];
 
     // Eliminar las subtareas de la tarea
-    $sql = "DELETE FROM subtarea WHERE Tarea_idTarea =" . $idTarea . "";
+    $sql = "DELETE FROM subtarea WHERE idSubtarea =" . $idSubtarea . "";
     $query = $conexion->prepare($sql);
     $query->execute();
 
-    // Eliminar la tarea de la base de datos
-    $sql = "DELETE FROM tarea WHERE idTarea = '" . $idTarea . "'";
-    $query = $conexion->prepare($sql);
-    $query->execute();
 ?>

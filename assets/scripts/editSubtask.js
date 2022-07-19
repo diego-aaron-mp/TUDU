@@ -452,4 +452,139 @@
 
     });
 
+    // Abrir modal de agregar subtarea al dar click en boton btnAddSubtask
+    $(document).on('click', '#btnAddSubtask', function () {
+        // Obtener el id de la tarea
+        idTask = $(this).attr('name');
+        // Recortar la cadena "tarea?"
+        idTask = idTask.substring(6);
+        // Mostrar el modal
+        $('#addSubtaskModal').modal('show');
+
+        // Al dar click en btnSubmitAddTask
+        $('#btnSubmitAddSubtask').click(function () {
+            // Obtener el valor del campo inputAddSubtask
+            var inputAddSubtask = document.getElementById('inputAddSubtask');
+
+            // Eliminar espacios en blanco de los campos
+            inputAddSubtask.value = inputAddSubtask.value.trim();
+            // Validar el titulo de la tarea
+            if (inputAddSubtask.value.length < 1) {
+                inputAddSubtask.classList.add('is-invalid');
+                inputAddSubtask.classList.remove('is-valid');
+            } else {
+                inputAddSubtask.classList.add('is-valid');
+                inputAddSubtask.classList.remove('is-invalid');
+            }
+            // Enviar formulario si todos los campos son validos
+            if (inputAddSubtask.classList.contains('is-valid')) {
+                // Remover las clases de validacion
+                inputAddSubtask.classList.remove('is-valid');
+                inputAddSubtask.classList.remove('is-invalid');
+                // Redireccionar a editarTarea.php con ajax
+                $.ajax({
+                    url: './crearSubtarea.php',
+                    type: 'POST',
+                    data: {
+                        idTask: idTask,
+                        inputAddSubtask: inputAddSubtask.value
+                    },
+                    // Mostrar las tareas del usuario
+                    success: function (response) {
+                        $('#divTasks').load('./verTareas.php?lista=' + idList);
+                        // Limpiar campos
+                        inputAddSubtask.value = '';
+                        idTask = '';
+                        // Cerrar el modal
+                        $('#addSubtaskModal').modal('hide', function () {
+                            // Quitar clases de validacion
+                            inputAddSubtask.classList.remove('is-valid');
+                            inputAddSubtask.classList.remove('is-invalid');
+                            idTask = '';
+                        });
+                    }
+                });
+            }
+        });
+
+
+    });
+
+    // Eliminar subtarea al dar click en boton
+    $(document).on('click', '#btnDeleteSubtask', function () {
+        var idSubtarea = $(this).attr('name');
+
+        // Recortar la cadena "subtarea?"
+        idSubtarea = idSubtarea.substring(9);
+
+        $.ajax({
+            url: './eliminarSubtarea.php?idSubtarea=' + idSubtarea,
+            type: 'GET',
+            data: {
+                idSubtarea: idSubtarea
+            },
+            // Mostrar las tareas del usuario
+            success: function (response) {
+                $('#divTasks').load('./verTareas.php?lista=' + idList);
+                idSubtarea = '';
+            }
+        });
+    });
+
+    // Abri el modal para editar subtarea al dar click en boton
+    $(document).on('click', '#btnEditSubtask', function () {
+        // Obtener el id de la subtarea
+        idSubtask = $(this).attr('name');
+        // Recortar la cadena "subtarea?"
+        idSubtask = idSubtask.substring(9);
+        // Mostrar el modal
+        $('#editSubtaskModal').modal('show');
+
+        // Al dar click en btnSubmitEditSubtask
+        $('#btnSubmitEditSubtask').click(function () {
+            // Obtener el valor del campo inputEditSubtask
+            var inputEditSubtask = document.getElementById('inputEditSubtask');
+            // Eliminar espacios en blanco de los campos
+            inputEditSubtask.value = inputEditSubtask.value.trim();
+            // Validar el titulo de la tarea
+            if (inputEditSubtask.value.length < 1) {
+                inputEditSubtask.classList.add('is-invalid');
+                inputEditSubtask.classList.remove('is-valid');
+            } else {
+                inputEditSubtask.classList.add('is-valid');
+                inputEditSubtask.classList.remove('is-invalid');
+            }
+            // Enviar formulario si todos los campos son validos
+            if (inputEditSubtask.classList.contains('is-valid')) {
+                // Remover las clases de validacion
+                inputEditSubtask.classList.remove('is-valid');
+                inputEditSubtask.classList.remove('is-invalid');
+                // Redireccionar a editarTarea.php con ajax
+                $.ajax({
+                    url: './editarSubtarea.php',
+                    type: 'POST',
+                    data: {
+                        idSubtask: idSubtask,
+                        inputEditSubtask: inputEditSubtask.value
+                    },
+                    // Mostrar las tareas del usuario
+                    success: function (response) {
+                        $('#divTasks').load('./verTareas.php?lista=' + idList);
+                        // Limpiar campos
+                        inputEditSubtask.value = '';
+                        idSubtask = '';
+                        // Cerrar el modal
+                        $('#editSubtaskModal').modal('hide', function () {
+                            // Quitar clases de validacion
+                            inputEditSubtask.classList.remove('is-valid');
+                            inputEditSubtask.classList.remove('is-invalid');
+                            idSubtask = '';
+                        }
+                        );
+                    }
+                });
+            }
+        });
+    });
+
 })();
