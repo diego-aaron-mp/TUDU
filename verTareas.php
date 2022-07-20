@@ -58,7 +58,12 @@ foreach ($tareas as $key => $value) : ?>
                         <label class="list-group-item">
                             <div class="row">
                                 <div class="col-10">
-                                    <input class="form-check-input me-1" type="checkbox" value="">
+                                    <input class="form-check-input me-1" id="checkSubtarea" value="<?php echo $valueSubtask['checkSubtarea']; ?>" name="subtarea?<?php echo $valueSubtask['idSubtarea']; ?>" type="checkbox" <?php
+                                    // Si la subtarea esta completada, marcarla como completada
+                                    if ($valueSubtask['checkSubtarea'] == 1) {
+                                        echo "checked";
+                                    }
+                                    ?>>
                                     <?php echo $valueSubtask['descripcionSubtarea']; ?>
                                 </div>
                                 <div class="col-2">

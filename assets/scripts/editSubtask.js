@@ -621,4 +621,35 @@
         });
     });
 
+    // Funciones de lista de tarea
+    // Al dar click en checkSubtarea
+    $(document).on('click', '#checkSubtarea', function () {
+        // Obtener el id de la subtarea
+        var idSubtarea = $(this).attr('name');
+        // Recortar la cadena "subtarea?"
+        idSubtarea = idSubtarea.substring(9);
+        // Obtener el valor del checkbox
+        var checkSubtarea = $(this).attr('value');
+        // Si la tarea esta completada, se la marca como no completada
+        if (checkSubtarea == '1') {
+            checkSubtarea = 0;
+        } else {
+            checkSubtarea = 1;
+        }
+        // Enviar el valor del checkbox a la base de datos
+        $.ajax({
+            url: './marcarSubtarea.php',
+            type: 'POST',
+            data: {
+                idSubtarea: idSubtarea,
+                checkSubtarea: checkSubtarea
+            },
+            // Mostrar las tareas del usuario
+            success: function (response) {
+                $('#divTasks').load('./verTareas.php?lista=' + idList);
+            }
+        });   
+    });
+    
+
 })();
