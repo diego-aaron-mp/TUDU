@@ -293,9 +293,12 @@ $tareas = $query->fetchAll();
   <div class="modal fade" id="editSubtaskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
-          <button type="button" class="close btn-close" data-dismiss="modal" aria-label="Close">
+        <div class="modal-header bg-secondary">
+          <h5 class="modal-title text-white" id="exampleModalLabel">
+            <i class="bi bi-pencil-fill"></i>
+            Editar subtarea
+          </h5>
+          <button type="button" id="btnCloseEditSubtask" class="close btn-close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true"></span>
           </button>
         </div>
@@ -307,8 +310,7 @@ $tareas = $query->fetchAll();
             <input type="text" class="form-control" id="inputEditSubtask" aria-describedby="inputEditSubtask" placeholder="Ej. Subtarea de estudio">
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary">Guardar</button>
+            <button type="button" id="btnSubmitEditSubtask" class="btn btn-primary">Guardar</button>
           </div>
         </div>
       </div>

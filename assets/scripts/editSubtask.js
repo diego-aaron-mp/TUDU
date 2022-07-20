@@ -531,14 +531,31 @@
         });
     });
 
-    // Abri el modal para editar subtarea al dar click en boton
+    // Abrir el modal para editar subtarea al dar click en boton
     $(document).on('click', '#btnEditSubtask', function () {
         // Obtener el id de la subtarea
         idSubtask = $(this).attr('name');
         // Recortar la cadena "subtarea?"
         idSubtask = idSubtask.substring(9);
-        // Mostrar el modal
-        $('#editSubtaskModal').modal('show');
+
+        // Consultar la base de datos para obtener la informacion de la subtarea
+        $.ajax({
+            url: './obtenerSubtarea.php',
+            type: 'POST',
+            data: {
+                idSubtask: idSubtask
+            },
+            success: function (response) {
+                // Obtener los datos de la subtarea
+                var subtarea = JSON.parse(response);
+
+                // Mostrar los datos en los campos del formulario
+                $('#inputEditSubtask').val(subtarea.trim());
+
+                // Mostrar el modal
+                $('#editSubtaskModal').modal('show')
+            }
+        });
 
         // Al dar click en btnSubmitEditSubtask
         $('#btnSubmitEditSubtask').click(function () {
@@ -583,7 +600,24 @@
                         );
                     }
                 });
+
             }
+        });
+        // Cerrar modal al dar click en boton
+        $('#btnCloseEditSubtask').click(function () {
+            $('#editSubtaskModal').modal('hide');
+            // Quitar clases de validacion
+            inputEditSubtask.classList.remove('is-valid');
+            inputEditSubtask.classList.remove('is-invalid');
+            idSubtask = '';
+        });
+
+        // Cerrar el modal
+        $('#editSubtaskModal').modal('hide', function () {
+            // Quitar clases de validacion
+            inputEditSubtask.classList.remove('is-valid');
+            inputEditSubtask.classList.remove('is-invalid');
+            idSubtask = '';
         });
     });
 
