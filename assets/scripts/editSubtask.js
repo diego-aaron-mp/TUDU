@@ -676,6 +676,7 @@
             // Mostrar las tareas del usuario
             success: function (response) {
                 $('#divTasks').load('./verTareas.php?lista=' + idList);
+
             }
         });
     });

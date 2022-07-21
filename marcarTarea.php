@@ -19,9 +19,10 @@ $query = $conexion->prepare($sql);
 $query->execute();
 
 // Actualizar las subtareas de la tarea en la base de datos
-// $sql = "UPDATE subtarea SET checkSubtarea = " . $checkTarea . " WHERE Tarea_idTarea = " . $idTarea . "";
-// $query = $conexion->prepare($sql);
-// $query->execute();
+$sql = "UPDATE subtarea SET checkSubtarea = " . $checkTarea . " WHERE Tarea_idTarea = " . $idTarea . "";
+$query = $conexion->prepare($sql);
+$query->execute();
+
 
 
 ?>
