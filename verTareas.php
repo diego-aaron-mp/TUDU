@@ -23,7 +23,13 @@ foreach ($tareas as $key => $value) : ?>
         <div class="card">
             <!-- Titulo de la card -->
             <div class="modal-header">
-                <h5 class="card-title" id="taskTitle"><input type="checkbox" class="form-check-input" id="customCheck1">&nbsp;<?php echo $value['tituloTarea']; ?></h5>
+                <h5 class="card-title" id="taskTitle"><input type="checkbox" class="form-check-input" id="checkTarea" name="tarea?<?php echo $value['idTarea']; ?>" value="<?php echo $value['checkTarea']; ?>" <?php
+                                                                                                                                                                                                                // Si la subtarea esta completada, marcarla como completada
+                                                                                                                                                                                                                if ($value['checkTarea'] == 1) {
+                                                                                                                                                                                                                    echo "checked";
+                                                                                                                                                                                                                }
+                                                                                                                                                                                                                ?>>
+                    &nbsp;<?php echo $value['tituloTarea']; ?></h5>
                 <!-- Boton de eliminar  -->
                 <button type="button" id="btnDeleteTask" name="tarea?<?php echo $value['idTarea']; ?>" class="btn btn-close">
                 </button>
@@ -59,11 +65,11 @@ foreach ($tareas as $key => $value) : ?>
                             <div class="row">
                                 <div class="col-10">
                                     <input class="form-check-input me-1" id="checkSubtarea" value="<?php echo $valueSubtask['checkSubtarea']; ?>" name="subtarea?<?php echo $valueSubtask['idSubtarea']; ?>" type="checkbox" <?php
-                                    // Si la subtarea esta completada, marcarla como completada
-                                    if ($valueSubtask['checkSubtarea'] == 1) {
-                                        echo "checked";
-                                    }
-                                    ?>>
+                                                                                                                                                                                                                                // Si la subtarea esta completada, marcarla como completada
+                                                                                                                                                                                                                                if ($valueSubtask['checkSubtarea'] == 1) {
+                                                                                                                                                                                                                                    echo "checked";
+                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                ?>>
                                     <?php echo $valueSubtask['descripcionSubtarea']; ?>
                                 </div>
                                 <div class="col-2">

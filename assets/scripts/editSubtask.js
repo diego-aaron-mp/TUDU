@@ -648,8 +648,37 @@
             success: function (response) {
                 $('#divTasks').load('./verTareas.php?lista=' + idList);
             }
-        });   
+        });
     });
-    
+
+    // Al dar click en checkTarea
+    $(document).on('click', '#checkTarea', function () {
+        // Obtener el id de la tarea
+        var idTarea = $(this).attr('name');
+        // Recortar la cadena "tarea?"
+        idTarea = idTarea.substring(6);
+        // Obtener el valor del checkbox
+        var checkTarea = $(this).attr('value');
+        // Si la tarea esta completada, se la marca como no completada
+        if (checkTarea == '1') {
+            checkTarea = 0;
+        } else {
+            checkTarea = 1;
+        }
+        // Enviar el valor del checkbox a la base de datos
+        $.ajax({
+            url: './marcarTarea.php',
+            type: 'POST',
+            data: {
+                idTarea: idTarea,
+                checkTarea: checkTarea
+            },
+            // Mostrar las tareas del usuario
+            success: function (response) {
+                $('#divTasks').load('./verTareas.php?lista=' + idList);
+            }
+        });
+    });
+
 
 })();
